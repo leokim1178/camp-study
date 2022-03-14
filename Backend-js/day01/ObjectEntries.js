@@ -22,10 +22,13 @@ console.log(arr);
 //   [ 'nightmare', 46 ]
 // ]
 
-let result = [];
+let result = []
 
 // for문을 완성해주세요.
-for(   ){
+for(let i=0;i<arr.length;i++){
+  let key=arr[i][0];
+  var a=arr[i][1];
+  let [{key:a}]=result
   
 }
 

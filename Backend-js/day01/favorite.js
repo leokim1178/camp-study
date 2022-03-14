@@ -2,7 +2,7 @@
 
 function favoriteFood(foods){
   // Template literal을 사용해 보세요.
-  let result = ;
+  let result = `제가 좋아하는 음식은 ${foods}입니다`;
   return result;
 }
 
