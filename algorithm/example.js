@@ -16,3 +16,14 @@ for(i=0; i<limit; i=i+2){
 const answer1=
       Math.floor(limit/2)
 console.log(answer1)
+
+let num =24
+let str=toString(num)
+console.log(str)
+let classs = "be"
+let obj={}
+obj['nm']='taeyoung'
+obj[classs]='be'
+console.log(obj) //질문
+
+

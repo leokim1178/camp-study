@@ -26,9 +26,11 @@ let result = []
 
 // for문을 완성해주세요.
 for(let i=0;i<arr.length;i++){
-  let key=arr[i][0];
-  var a=arr[i][1];
-  let [{key:a}]=result
+  let obj={}
+  obj[arr[i][0]] =arr[i][1]; 
+  //객체일경우 대괄호 안에 key값을 넣고 '='연산자로 value 값을 설정해줄수 있다
+  console.log(obj)
+  result[i]=obj
   
 }
 
