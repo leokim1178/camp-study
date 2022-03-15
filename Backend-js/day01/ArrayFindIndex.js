@@ -4,7 +4,7 @@
 const arr = ['김세준', '백선호', '조아라', '홍재훈'];
 
 function cb(element) {
-    return element==='조아라';
+    return element[0]==='조아라';
 }
 
 const result = arr.findIndex(cb);
