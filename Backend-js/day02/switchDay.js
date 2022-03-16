@@ -20,12 +20,9 @@ switch (day) {
   case 5:
     dayName = '금요일';
     break;
-  case 6:
-    dayName = '토요일';
+  default:
+    dayName = '주말입니다';
     break;
-  case 0:
-    dayName = '일요일';
-    break;  
 }
 
 console.log(dayName);
