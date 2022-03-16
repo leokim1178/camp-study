@@ -1,10 +1,10 @@
 function evenOdd(num) {
-	if(num==0){
+	if(num===0){
     console.log("Zero")
-  }else if(num%2==0) {
+  }else if(num%2===0) {
     console.log("Even")
 
-  }else if(num%2==1){
+  }else if(num%2===1){
     console.log("Odd")
   }
 }
