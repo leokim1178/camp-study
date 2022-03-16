@@ -4,6 +4,9 @@
 const arr = [11, 22, 33, 44, 55];
 let sum = 0;
 
+for(let element of arr){
+    sum= sum+element
+}
 // for-of
 
 console.log(sum); // 165
