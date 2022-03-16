@@ -8,6 +8,8 @@ const obj = {
 };
 
 for (let key in obj) {
+  obj[`${key}`]=obj[`${key}`].toUpperCase();
+
 }
 
 console.log(obj);
