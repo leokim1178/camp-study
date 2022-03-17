@@ -3,7 +3,7 @@ let email = "codecamp@gmail.com"
 function pwlize(email){
     let ID=email.split("@")[0].split("")
     let dot=email.split("@")[1].split("")
-    dot
+    
     let IDresult =ID.splice(ID.length-2,2,"*","*")
 
     console.log(IDresult)
