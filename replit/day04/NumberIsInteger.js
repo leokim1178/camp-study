@@ -5,6 +5,11 @@
   실수라면  Math.ceil()을 이용해 올림을 해주는 함수 solution을 완성해주세요.
 */
 function solution(num) {
+  if(Number.isInteger(num)){
+    return num
+  }else{
+    return Math.ceil(num)
+  }
 
   
 }
