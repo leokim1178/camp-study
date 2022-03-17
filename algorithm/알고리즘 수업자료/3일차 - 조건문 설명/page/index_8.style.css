@@ -1,0 +1,159 @@
+body {
+    overflow-y: hidden;
+}
+
+#condition_info_wrapper {
+    display : flex;
+}
+
+#condition_example_wrapper {
+    display : flex;
+    align-items: center;
+    height : 477px;
+    /* align-items: baseline; */
+}
+
+#condition_example_data {
+    display : flex;
+    align-items: left;
+    width : 25%;
+    font-size: 24px;
+    justify-content: space-evenly;
+    margin-top : 0px;
+    flex-direction: column;
+}
+
+.blue {
+    color : #2D46B9;
+}
+
+.red {
+    color : #B42B51;
+}
+
+.yellow {
+    color : #FFB319;
+    font-weight: 900;
+}
+
+#condition_example_ment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid 1px #ababab;
+    text-align: center;
+    font-size: 30px;
+    height: 150px;
+    flex-direction: column;
+}
+
+.purple {
+    color : #AE00FB;
+}
+
+.condition_example {
+    padding : 0px 20px;
+    color : #AE00FB;
+    font-weight: 900;
+}
+
+.borderRight {
+    border-right: solid 1px #ababab;
+}
+
+.underline {
+    border-bottom: solid 3px black;
+    padding-bottom: 40px;
+    margin-top : 65px;
+}
+
+#length_size {
+    color : #AE00FB;
+}
+
+.notice_types {
+    width : 200px;
+    height : 480px;
+}
+
+.right { border-right : solid 1px #ababab; }
+.left { border-left : solid 1px #ababab; }
+
+#test_info_wrapper {
+    width : 70.2%;
+    display : flex;
+    flex-direction: column;
+    align-items: space-between;
+}
+
+.title {
+    /* height : 60px; */
+    font-size : 24px;
+    font-weight : 500;
+    text-align :center;
+    padding : 10px 0px;
+    border-bottom : solid 1px #ababab;
+}
+
+.types_list_wrapper {
+    height : 81%;
+    padding-left : 0px;
+    padding-top : 20px;
+}
+
+.types_list_wrapper ul {
+    padding-left : 10px;
+    padding-bottom : 30px;
+}
+
+.types_list_wrapper ul li {
+    margin-left : 30px;
+    font-size : 14px;
+    padding-top : 10px;
+    color : #ababab;
+}
+
+#test_code_wrapper {
+    height : 425px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top : 0px;
+}
+
+#code_info {
+    padding-top : 30px;
+    font-size : 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 70px;
+}
+
+#code_info div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#code_info div input {
+    margin : 0px 20px;
+    padding : 5px;
+    font-size : 15px;
+    text-align: center;
+    box-shadow: 0px 4px 20px rgb(0 0 0 / 20%);
+}
+
+#test_code_result_wrapper {
+    height : 50px;
+    background-color: black;
+    color : white;
+    display : flex;
+    align-items: center;
+    padding-left : 10px;
+}
+
+.console {
+    padding-left : 50px;
+    color : #ababab;
+}

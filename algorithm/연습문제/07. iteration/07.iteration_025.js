@@ -1,11 +1,17 @@
 function makeNumber(num) {
 	let str = '';
   for(i=0;i<=num;i++){
-     if(i<num){
-    str=str.concat(`${i}`)
-    str=str.concat("-")
-    }else
-    str=str.concat(`${i}`)
+    if(i<num){
+      str+=i;
+      str+=("-");
+      }else
+      str+=i;
+
+    //  if(i<num){
+    // str=str.concat(i)
+    // str=str.concat("-")
+    // }else
+    // str=str.concat(i)
     }
   console.log(str)
 }

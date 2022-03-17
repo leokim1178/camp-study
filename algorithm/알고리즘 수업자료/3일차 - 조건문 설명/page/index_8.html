@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="./index_8.style.css" rel='stylesheet'/>
+    <link href="../commons.style.css" rel='stylesheet'/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='condition_info_wrapper'>
+        <div class="notice_types right"> 
+            <div class="title blue"> Truthy </div>
+            <div class="types_list_wrapper">
+                <ul> true </ul>
+                <ul> 0 이 아닌 숫자 
+                    <li> 1 이상의 수 ( ex : 1 ) </li>
+                    <li> 0 미만의 수 ( ex : -1 ) </li>
+                </ul>
+                <ul> 빈 문자열이 아닌 문자열 
+                    <li> "Junny" </li>
+                </ul>
+                <ul> 객체 
+                    <li> {} </li>
+                </ul>
+                <ul> 배열 
+                    <li> [] </li>
+                </ul>
+            </div>
+        </div>
+        <div id="test_info_wrapper">
+            <div id="test_code_wrapper"> 
+                <div id="code_info">
+                    <div> if( <input type="text" id="inputs" onchange="getBoolean()" onkeydown="setInit()" autocomplete="off" /> ) { </div>
+                    <div class="console" id="truthy"> console.log("Truthy 한 값을 입력하셨습니다.") </div>
+                    <div> } else { </div>
+                    <div class="console" id="falsy"> console.log("Falsy 한 값을 입력하셨습니다.") </div>
+                    <div> } </div>
+                </div>
+            </div>
+            <div id="test_code_result_wrapper">
+                : 
+            </div>
+        </div>
+
+        <div class="notice_types left"> 
+            <div class="title red"> Falsy </div>
+            <ul class="types_list_wrapper">
+                <ul> false </ul>
+                <ul> 숫자 0 
+                    <li> 0 </li>
+                    <li> -0 </li>
+                </ul>
+                <ul> 빈 문자열 
+                    <li> "" </li>
+                </ul>
+                <ul> null </ul>
+                <ul> NaN </ul>
+                <ul> undefined </ul>
+            </ul>
+        </div>
+    </div>
+    <script src='../script.js' onload="getObjResult()"> </script>
+</body>
+</html>
