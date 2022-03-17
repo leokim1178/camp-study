@@ -2,7 +2,7 @@
 // 하나라도 숫자가 아니라면 false를 리턴하도록
 // 콜백 함수 solution 함수를 완성하세요.
 function solution(element, index, array) {
-
+    return typeof element ==="number"
   
 }
 
