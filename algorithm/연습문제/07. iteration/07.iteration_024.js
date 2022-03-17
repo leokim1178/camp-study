@@ -1,9 +1,9 @@
 function countLetter(str) {
 	let count = 0;
-  let newStr= str.split("")
-  for(i=0;i<newStr.length;i++){
-    if(newStr[i]==='a'){
-      count=count+1
+  // let newStr= str.split("")
+  for(i=0;i<str.length;i++){
+    if(str[i]==='a' || str[i]==="A"){
+      count++;
     }
   }
   console.log(count)

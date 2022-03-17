@@ -10,7 +10,7 @@ const obj = {
 
 for (let key in obj) {
   if(key!=='contents'){
-  obj[`${key}`]=obj[`${key}`].toUpperCase();
+  obj[key]=obj[key].toUpperCase();
   }
 }
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="./index_7.style.css" rel='stylesheet'/>
+    <link href="../commons.style.css" rel='stylesheet'/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='condition_info_wrapper'>
+        <div id='condition_example_wrapper'>
+            <div id='condition_select_value'>
+                <div class="select" id="select_2" onclick="selectFunction(2)"> const a = 2 </div>
+                <div id="select_1" onclick="selectFunction(1)"> const a = 1 </div>
+                <div id="select_0" onclick="selectFunction(0)"> const a = 0 </div>
+            </div>
+
+            <div id='condition_result_value'>
+                <div id='condition_result_showing_wrapper'>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src='../script.js' onload="getObjResult()"> </script>
+</body>
+</html>
