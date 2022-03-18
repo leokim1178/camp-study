@@ -11,14 +11,17 @@ function solution(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     if(Number.isNaN(Number(arr[i]))===false){
-      sum +=Number(arr[i]) 
+      sum += Number(arr[i]) 
     }
   }
-
   return sum;
 }
+//Number.isNaN이 better than isNaN
+//isNaN은 숫자라면 false 나머지는 true
+//Number.isNaN은 값이 NaN이면 true 나머지는 false
 
 const arr = ['1', '2w', '3', 'qwer'];
+
 
 const result = solution(arr);
 

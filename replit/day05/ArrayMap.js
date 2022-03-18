@@ -3,7 +3,7 @@
 // HINT : Number('1')
 
 function solution(element, index, array) {
-
+    return Number(element)
   
 }
 

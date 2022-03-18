@@ -10,9 +10,12 @@ function solution(num) {
   }else{
     return Math.ceil(num)
   }
-
-  
 }
+//Math.ceil은 올림 함수
+//Math.floor은 내림 함수
+//Math.round는 반올림함수
+//0은 false,!0은 true로 판별된다, !!'' 이렇게 빈문자열도 boolean값을 따지자면 false다
+//0이외의 값은 true  !!12321 이렇게 0을 제외한 숫자에 !!를 갈기면 true값이 나온다
 
 console.log(solution(3)); // 3
 console.log(solution(3.3)); // 4
