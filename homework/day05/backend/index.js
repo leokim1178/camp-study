@@ -2,11 +2,12 @@ import express from 'express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import {options} from './swagger/config.js'
+import cors from 'cors'
 
 const app=express()
 app.use(express.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
-
+app.use(cors())
 
 app.get('/users',(req,res) => {
     const result=[// 회원 1명 데이터 객체 예시
