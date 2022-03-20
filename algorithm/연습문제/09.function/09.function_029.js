@@ -6,18 +6,3 @@ function divide(data1,data2){
 
 
 divide(10, 2) // 5
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
