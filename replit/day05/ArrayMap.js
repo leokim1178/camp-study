@@ -4,7 +4,6 @@
 
 function solution(element, index, array) {
     return Number(element)
-  
 }
 
 const arr = ['1', '2', '3'];

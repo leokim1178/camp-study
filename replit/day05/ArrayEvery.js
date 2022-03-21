@@ -3,7 +3,6 @@
 // 콜백 함수 solution 함수를 완성하세요.
 function solution(element, index, array) {
     return typeof element ==="number"
-  
 }
 
 const result1 = [1, 2, 3, 4, 5].every(solution) 
