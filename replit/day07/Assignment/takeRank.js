@@ -1,10 +1,18 @@
-//assignment
-function takeRank(arr){
-    // 아래에 코드를 작성해주세요.  
-    let answer=Array.from();
-
+function takeRank(arr){  
+    let n=arr.length;
+    let answer=Array.from({length:n}, ()=>1); // 배열의길이, 1로 초기화
+    console.log(answer)
+    for(let i=0; i<n; i++){
+      for(j=0; j<n; j++){
+        if(arr[j]>arr[i])
+        { console.log(arr[j],arr[i])
+          answer[i]++
+        	console.log(answer)
+        };
+      }
+    }
     return answer;
-}
+  }
 
-// 아래의 코드는 절대로 수정하거나 삭제하지 마세요.
-module.exports = takeRank;
+  let arr=[87, 89, 92, 100, 76];
+  console.log(takeRank(arr));

@@ -3,12 +3,13 @@
 
 function array(n){
   // Array.from을 사용해주세요.
-  let arr = Array.from();
+  let arr = Array.from({length:n},()=>2);
 
-  arr.forEach((num, i)=>{
+  arr.forEach((num, i)=>{ 
+    
+    if(i%2===1){
+      arr[i]+=1}})
 
-  })
-  
   return arr;
 }
 
