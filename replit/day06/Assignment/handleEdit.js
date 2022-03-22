@@ -1,10 +1,11 @@
 //assignment
 const handleEdit = (nickname, interests) => {
 
-  interests=interests.split(",")
-  for (let i=0; i<interests.length;i++){
-    interests[i]=interests[i].trim()}
-  interests= interests.join(",")
+  interests=interests.split(",").map(x=>x.trim()).join(",")
+  // interests=interests.split(",")
+  // for (let i=0; i<interests.length;i++){
+  //   interests[i]=interests[i].trim()}
+  // interests= interests.join(",")
   
   const handleObj = {
       // 아래에 코드를 작성해주세요.

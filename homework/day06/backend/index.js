@@ -6,7 +6,6 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import {options} from './swagger/config.js'
 import dotenv from 'dotenv'
-import axios from 'axios'
 import cors from 'cors'
 
 dotenv.config()

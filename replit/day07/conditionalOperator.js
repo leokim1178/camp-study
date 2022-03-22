@@ -3,6 +3,7 @@
 const numbers = [1, 2, 3, 4, 5];
 
 function onehundred(num) {
+    return num >100 ? true : false
   // 삼항연산자를 사용해주세요.
 
 }
