@@ -6,9 +6,10 @@ function array(n){
   let arr = Array.from({length:n},()=>2);
 
   arr.forEach((num, i)=>{ 
-    
+  
     if(i%2===1){
-      arr[i]+=1}})
+      arr[i]+=1}}
+      )
 
   return arr;
 }
