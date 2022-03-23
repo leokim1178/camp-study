@@ -2,6 +2,7 @@ function takeRank(arr){
     let n=arr.length;
     let answer=Array.from({length:n}, ()=>1); // 배열의길이, 1로 초기화
     console.log(answer)
+    
     for(let i=0; i<n; i++){
       for(j=0; j<n; j++){
         if(arr[j]>arr[i])

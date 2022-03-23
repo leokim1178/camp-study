@@ -5,7 +5,6 @@ function sum (arr){
   const result = arr.reduce((acc,cur,i,array)=>{
      console.log(acc, cur)
       return acc+cur
-      
     })
     console.log(result)
   // reduce 메서드를 사용해 주세요.

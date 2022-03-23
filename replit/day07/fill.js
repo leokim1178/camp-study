@@ -4,6 +4,6 @@ let arr = [1,2,3,4,5,6,7,8];
 function fill(arr){
   return arr.fill(10,1,5)
   // fill 메서드를 사용해 주세요.
-
+  // 채워준다는 것보다는 바꿔준다는 개념이 더 맞다
 }
 console.log(fill(arr));  // [1, 10, 10, 10, 10, 6, 7, 8]
