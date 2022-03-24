@@ -33,8 +33,7 @@ app.post('/tokens/phone',async (req,res)=>{
         })
         await TokenDB.save()
         }
-        
-
+      
   }
 })
 
@@ -42,6 +41,7 @@ app.patch('/tokens/phone', async(req, res) => {
   const myphone=req.body.ppp
   const myToken=req.body.ttt
   if(await Token.findOne({phone: myphone}&&{token: myToken}&&{isAuth: false})){
+    console.log(await Token.findOne({phone: myphone}))
     await Token.updateOne({isAuth:false},{isAuth: true})
     res.send(true)
   }else{
