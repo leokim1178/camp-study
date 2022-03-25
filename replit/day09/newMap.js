@@ -4,8 +4,12 @@
 function classification(str){
   let map = new Map([['A',1],['B',2],['C',3]]);
   // Map객체의 메서드를 사용해보세요.
-
-  return map;  
+  for(i=0; i<str.length; i++){
+    if(map.has(str[i])){
+      map.set(str[i],map.get(str[i])+1)
+    }
+  }
+  return map
 }
 var str = "ABCCCAA"
 console.log(classification(str)); //Map(3){'A' => 4, 'B' => 3, 'C' => 6}

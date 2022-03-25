@@ -3,9 +3,14 @@
 
 function common(arr1, arr2){
   // Set 객체를 사용해주세요.
-
-  let result = [];
-  return result;
+  let result =[]
+  let setA=new Set(arr1)
+  let setB=new Set(arr2)
+  console.log(setA,setB)
+  let intersection= new Set([...setA].filter(x=> setB.has(x)))
+  console.log(intersection)
+  result = [...intersection].length
+  return result
 }
 let a = ['a', 'b', 'c', 'c', 'b'];
 let b = ['b', 'b', 'b', 'c', 'e', 'e', 'f'];
