@@ -1,8 +1,10 @@
 // 커피 목록 조회 API를 요청해주세요.
 const getCoffee = async () => {
+  const result = await axios('http://localhost:3001/starbucks')
   // 받은 데이터로 createMenuCard 함수를 이용해
   // 메뉴 카드를 만들어주세요.
-  createMenuCard()
+  for(let i=0; i<result.data.length; i++ ){
+    createMenuCard(result.data[i])}
 }
 
 const createMenuCard = (data) => {

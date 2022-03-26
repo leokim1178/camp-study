@@ -26,10 +26,10 @@ export function getWelcomeTemplate({name,email,personal,prefer,phone,pwd,og}){
                 <div> 전화번호 : ${phone}</div>
                 <div> 비밀번호 : ${pwd}</div>
                 <div> 선호 사이트 : ${prefer}</div>
-                <div>       타입 : ${og}</div>
-                <div>       사이트명 : ${og}</div>
-                <div>       사이트 소개 : ${og}</div>
-                <div>       사이트 이미지 : ${og}</div>
+                <div> 사이트명 : </div>
+                <a href=${og.url}> ${og.title} </a>
+                <div> ${og.description}</div>
+                <img src=${og.image}></img>
                 </body>
                 </html>
         `

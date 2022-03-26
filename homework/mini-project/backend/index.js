@@ -1,17 +1,23 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import { Token } from './models/token.model.js'
-import { Starbucks } from './models/starbucks.model.js'
-import { User } from './models/user.model.js'
+
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc'
+import {options} from './swagger/config.js'
+
 import { checkValidationPhone,getToken,sendTokenToSMS } from './phone.js'
-import dotenv from 'dotenv'
-import { getOg } from './webcrawler.js'
 import { checkValidationEmail,getWelcomeTemplate,sendEmail } from './email.js'
+import { getOg } from './scrapper.js'
+import dotenv from 'dotenv'
+import { Token } from './models/token.model.js'
+import { User } from './models/user.model.js'
+import { Starbucks } from './models/starbucks.model.js'
 
 const app = express();
 app.use(cors())
 app.use(express.json())
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 dotenv.config()
 
 //회원 가입 API: POST /user
@@ -30,11 +36,12 @@ app.post('/user/',async (req,res)=>{
         pwd: user.pwd,
         og: Og
     })
-    await UserDB.save().then((req)=>{
+    await UserDB.save().then(async(req)=>{
+      const forMail = await User.findOne({phone:user.phone})
       // const user= req.body.user
       const isValid=checkValidationEmail(user.email)
       if(isValid){
-        const welcome= getWelcomeTemplate(user)
+        const welcome= getWelcomeTemplate(forMail)
         sendEmail(user.email,welcome)
 
     }else{
@@ -52,7 +59,7 @@ app.post('/user/',async (req,res)=>{
 
 //회원 목록 조회 API: GET /users
 app.get('/users',async(req,res)=>{
-  const result =await User.findOne({token:req.body.token})
+  const result =await User.find()
   res.send(result)
 })
 
@@ -102,8 +109,9 @@ app.patch('/tokens/phone', async(req, res) => {
 
 
 //스타벅스 커피 목록 조회API: GET /starbucks 
-app.get('/starbucks',(req,res)=>{
-  
+app.get('/starbucks',async (req,res)=>{
+  const result = await Starbucks.find()
+  res.send(result)
 })
 
 // 몽고 DB 접속!!

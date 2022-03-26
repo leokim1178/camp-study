@@ -9,6 +9,7 @@ services:
       - ./phone.js:/myfolder/phone.js
       - ./models:/myfolder/models
       - ./email.js:/myfolder/email.js
+      - ./scrapper.js:/myfolder/scrapper.js
     ports:
       - 3001:3001
 
