@@ -8,5 +8,5 @@ const userSchema = new mongoose.Schema({
     prefer: String,
     pwd: String,
     og: Object
-})
+},{ versionkey : false})
 export const User = mongoose.model("User", userSchema)  //collection 만들기
