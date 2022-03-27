@@ -1,16 +1,12 @@
 /**
  * @swagger
- * /boards:
+ * /starbucks:
  *      get:
- *          summary: 게시글 가져오기
- *          tags: [Board]
- *          parameters:
- *              - in: query
- *                name: number
- *                type: int
+ *          summary: 스타벅스 커피 목록 조회
+ *          tags: [스타벅스]
  *          responses:
  *              200:
- *                  description: 성공
+ *                  description: 스타벅스 메뉴정보와 이미지정보
  *                  content:
  *                      application/json:
  *                          schema:
@@ -18,48 +14,10 @@
  *                            items:
  *                              type: object
  *                              properties:
- *                                  number:
- *	                                    type: int
- *	                                    example: 1
- *                                  writer:
+ *                                  name:
  *	                                    type: string
- *	                                    example: 철수
- *                                  title:
+ *	                                    example: 나이트로 바닐라 크림
+ *                                  img:
  *	                                    type: string
- *	                                    example: 제목입니다~~~
- *                                  contents:
- *	                                    type: string
- *	                                    example: 내용이에요!!!
- */
-
-/**
- * @swagger
- * /boards:
- *       post:
- *          summary: 게시글 등록하기
- *          tags: [Board]
- *          parameters:
- *              - in: query
- *                name: writer
- *                type: string
- *              - in: query
- *                name: password
- *                type: string
- *              - in: query
- *                name: title
- *                type: string
- *              - in: query
- *                name: contents
- *                type: string
- *          responses:
- *              200:
- *                  description: 성공
- *                  content:
- *                      application/json:
- *                          schema:
- *                              type: object
- *                              properties:
- *                                  message:
- *	                                    type: string
- *	                                    example: 게시물이 정상적으로 등록되었습니다.
+ *	                                    example: https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745467.jpg
  */

@@ -10,6 +10,8 @@ services:
       - ./models:/myfolder/models
       - ./email.js:/myfolder/email.js
       - ./scrapper.js:/myfolder/scrapper.js
+      - ./package.json:/myfolder/package.json
+      - ./swagger:/myfolder/swagger
     ports:
       - 3001:3001
 
