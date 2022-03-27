@@ -2,8 +2,8 @@
 
 function maxNum(nums){
 // Math.max 메서드와 스프레드 문법을 사용해 보세요.
-  let result;
-  return result;
+
+  return Math.max(...nums)
 }
 
 let arr = [100, 200, 400, 20, 10, 278, 488];
