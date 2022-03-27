@@ -33,6 +33,19 @@
  *	                                    type: string
  *	                                    example: 123456
  *                                  og:
- *	                                    type: Object
- *	                                    example: { }
+ *	                                    type: object
+ *	                                    properties:
+ *	                                        title:
+ *	                                            type: string
+ *	                                        url:
+ *	                                            type: string
+ *	                                        image:
+ *	                                            type: string
+ *	                                        description:
+ *	                                            type: string
+ *                                      
+ * 
+ * 
+ * 
+ * 
  */
