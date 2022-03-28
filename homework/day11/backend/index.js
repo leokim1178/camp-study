@@ -6,13 +6,14 @@ import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { options } from "./swagger/config.js";
 
+import { UserController } from "./controllers/user.controller.js"
+import { UsersController } from "./controllers/users.controller.js";
+
+
+
 import { checkValidationPhone, getToken, sendTokenToSMS } from "./phone.js";
-import {
-  checkValidationEmail,
-  getWelcomeTemplate,
-  sendEmail,
-} from "./email.js";
-import { getOg } from "./scrapper.js";
+
+
 import dotenv from "dotenv";
 import { Token } from "./models/token.model.js";
 import { User } from "./models/user.model.js";
@@ -25,44 +26,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 dotenv.config();
 
 //회원 가입 API: POST /user
-app.post("/user/", async (req, res) => {
-  const user = req.body.user;
-  const Og = await getOg(user);
-  let Ps = user.personal.split("-");
-  const secret = Ps[0] + "-".padEnd(8, "*");
-  if (await Token.findOne({ phone: user.phone } && { isAuth: true })) {
-    const UserDB = await new User({
-      name: user.name,
-      email: user.email,
-      personal: secret,
-      prefer: user.prefer,
-      phone: user.phone,
-      pwd: user.pwd,
-      og: Og,
-    });
-    await UserDB.save().then(async () => {
-      const forMail = await User.findOne({ phone: user.phone });
-      const isValid = checkValidationEmail(user.email);
-      if (isValid) {
-        const welcome = getWelcomeTemplate(forMail);
-        sendEmail(user.email, welcome);
-      } else {
-        res.send("이메일 확인필요");
-      }
-    });
-    const exId = User.findOne({ phone: user.phone });
-    res.send(exId.user._id);
-    console.log("완료");
-  } else {
-    res.status(422).send("에러!!핸드폰번호가 인증되지않았습니다!");
-  }
-});
+const userController = new UserController()
+app.post("/user/", userController.postUser);
 
 //회원 목록 조회 API: GET /users
-app.get("/users", async (req, res) => {
-  const result = await User.find();
-  res.send(result);
-});
+const usersController = new UsersController()
+app.get("/users", usersController.getUsers);
 
 //토큰 인증 요청 API: POST /tokens/phone
 app.post("/tokens/phone", async (req, res) => {
