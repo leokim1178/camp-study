@@ -4,5 +4,9 @@ function solution(n) {
     return x**2}
     else{
     return -1
+
+    return Number.isInteger(Mat.sqrt(n))
+    ?(Math.sqrt(n)+1)**2
+    : -1
 }
 }

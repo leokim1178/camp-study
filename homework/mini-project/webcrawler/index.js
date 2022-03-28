@@ -30,15 +30,5 @@ async function startCrawling(){  //전부 await 필요
 
     await browser.close()
 
-    // const stage=await page.$eval("#poduct_list_area > li:nth-child(2) > a > div > div.name > div > span", (el)=>el.textContent ) 
-    // await page.waitForTimeout(1000)
-
-    // const location=await page.$eval("#poduct_list_area > li:nth-child(2) > a > div > div.name > p:nth-child(4)", (el)=>el.textContent)
-    // await page.waitForTimeout(1000)
-
-    // const price = await page.$eval("#poduct_list_area > li:nth-child(2) > a > div > div.price > p > b",(el)=>el.textContent)
-    // await page.waitForTimeout(1000)
-
-    // await console.log(stage,location,price)
 }
 startCrawling()
