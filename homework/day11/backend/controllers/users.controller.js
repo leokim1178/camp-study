@@ -1,10 +1,12 @@
-import { User } from "../models/user.model.js";
+
+import { UsersService } from "./services/users.service.js";
 
 
 
 export class UsersController{
     getUsers= async(req, res) => {
-        const result = await User.find();
-        res.send(result);
-      }
+      const usersController = new UsersService()
+      const result = await usersController.findUsers()
+      res.send(result);
+    }
 }
