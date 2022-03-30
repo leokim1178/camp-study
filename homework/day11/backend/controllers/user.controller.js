@@ -1,5 +1,4 @@
 import { UserService } from "./services/user.service.js";
-import { User } from "../models/user.model.js";
 
 export class UserController {
   postUser = async (req, res) => {
@@ -9,11 +8,13 @@ export class UserController {
     const checkToken = userService.checkToken();
     if (checkToken) {
       //2. 유저 정보 저장
-      userService.saveUserDB()
-      //3. 유저 메일 전송
+      userService
+        .saveUserDB()
+        //3. 유저 메일 전송
         .then(() => userService.sendUserMail())
         .then(async () => {
-          const exId = await User.findOne({ phone: user.phone });
+          //4. 유저의 Id값 추출
+          const exId = await userService.findId();
           console.log("완료");
           res.send(exId._id);
         });

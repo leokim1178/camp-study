@@ -8,10 +8,9 @@ import { User } from "../../models/user.model.js";
 import { Token } from "../../models/token.model.js";
 
 export class UserService {
-  input;
-  constructor(userObj) {
-    this.input = userObj;
-  }
+  // constructor(userObj) {
+  //   this.input = userObj;
+  // }
   //1. 토큰 검증
   checkToken = async () => {
     const user = this.input;
@@ -44,5 +43,10 @@ export class UserService {
     } else {
       console.log("이메일 확인필요");
     }
+  };
+
+  findId = async () => {
+    const user = this.input;
+    return await User.findOne({ phone: user.phone });
   };
 }

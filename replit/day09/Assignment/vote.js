@@ -5,7 +5,6 @@ function vote(str){
   let set = new Set(str)
   let arr= [...set]
   let obj={}
-   
   
   for(i=0;i<arr.length;i++){
       obj[arr[i]]=0
