@@ -1,7 +1,9 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
+
 import { GraphQLModule } from '@nestjs/graphql';
 import { BoardModule } from './apis/boards/boards.module';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Board } from './apis/boards/entities/board.entity';
 @Module({
