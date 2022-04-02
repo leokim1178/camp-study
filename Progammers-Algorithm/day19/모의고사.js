@@ -9,6 +9,8 @@ function solution1(answers) {
     if (answers[i] == s1[i % 5]) {
       a[0]++;
     }
+    //==는 type과 상관없이 값만 비교한다
+    //===는 type과 값을 모두 비교한다
     if (answers[i] == s2[i % 8]) {
       a[1]++;
     }
