@@ -1,0 +1,121 @@
+show databases
+;
+use myproject02
+;
+show tables
+;
+desc product 
+;
+select * 
+from product
+;
+select price  
+from product
+;
+select name,price 
+from product
+;
+INSERT 
+into product(
+id
+,name
+,description
+,price
+,isSoldout)
+values(uuid(),'마우스','정말 좋은마우스입니다!',15000,false)
+;
+SELECT *
+FROM product_saleslocation
+;
+
+INSERT 
+into product_saleslocation (id,address,addressDetail,lat,lng,meetingTime)
+values(uuid(),'구로구','구로디지털단지역',0.0,0.1,'2022-12-31')
+;
+
+SELECT * 
+FROM product_saleslocation
+;
+
+UPDATE product 
+	set name = '키보드'
+	WHERE price = 15000
+;
+
+INSERT 
+into product(
+id
+,name
+,description
+,price
+,isSoldout)
+values(uuid(),'노트북','최신 맥북',20000,false)
+;
+
+SELECT price,isSoldout 
+FROM product
+WHERE name = '노트북'
+;
+
+SELECT *
+FROM product_saleslocation
+;
+
+UPDATE product 
+set productSaleslocationId='68458826-b3ed-11ec-8be3-1e9ebee0251b'
+WHERE name='키보드'
+;
+SELECT *
+FROM product
+;
+
+SELECT *
+FROM product_category
+;
+
+SELECT p.id ,p.name ,p.price , address, addressDetail
+FROM product p,product_saleslocation ps
+WHERE p.productSaleslocationId =ps.id 
+;
+
+INSERT 
+into product_category (id,name)
+values(uuid(),'전자기기')
+;
+
+UPDATE product 
+set productCategoryId='1e3ff924-b3f1-11ec-8be3-1e9ebee0251b'
+WHERE name='키보드'
+;
+
+SELECT p.id ,p.name ,p.price , address, addressDetail,pc.id ,pc.name 
+FROM product p,product_saleslocation ps, product_category pc 
+WHERE p.productCategoryId =pc.id 
+;
+
+INSERT 
+into product_category (id,name)
+values(uuid(),'음식')
+;
+INSERT 
+into product_category (id,name)
+values(uuid(),'의류')
+;
+INSERT 
+into product (id,name,description,price,isSoldout)
+values (uuid(),'셔츠','깨끗한셔츠',3000,false)
+;
+UPDATE product 
+set productCategoryId = '69157648-b3f3-11ec-8be3-1e9ebee0251b'
+where name = '셔츠'
+;
+
+UPDATE product 
+set productCategoryId='1e3ff924-b3f1-11ec-8be3-1e9ebee0251b'
+where name = '노트북'or name = '키보드'
+;
+
+SELECT p.name as '상품명',pc.name as '카테고리'
+from product p ,product_category pc 
+where p.productCategoryId =pc.id 
+;

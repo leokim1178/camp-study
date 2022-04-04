@@ -27,7 +27,14 @@ function solution2(a, b) {
   }
 }
 
-//solution3
+//best
+function solution3(a, b) {
+  const w = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const day = new Date(`2016.${a}.${b}`).getDay();
+  return w[day];
+}
+
+//solution4~5
 const month = {
   1: 31,
   2: 29,
@@ -44,7 +51,7 @@ const month = {
 };
 const week = ["FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU"];
 
-function solution3(a, b) {
+function solution4(a, b) {
   //a월 b일까지 해당되는 모든 일수를 저장
   let answer = 0;
   for (let i = 1; i < a; i++) {
@@ -56,7 +63,7 @@ function solution3(a, b) {
   return answer;
 }
 
-function solution4(a, b) {
+function solution5(a, b) {
   const answer = new Array(a).fill(1).reduce((acc, cur, i) => {
     const mn = cur + i;
     return (
