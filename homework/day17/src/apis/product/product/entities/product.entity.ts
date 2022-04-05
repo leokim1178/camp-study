@@ -1,3 +1,4 @@
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
     Column,
     Entity,
@@ -9,16 +10,22 @@ import { ProductSubCategory } from '../../productSubCategory/entities/productSub
 import { ProductTag } from '../../productTag/entities/productTag.entity';
 
 @Entity()
+@ObjectType()
 export class Product {
     @PrimaryGeneratedColumn('uuid')
+    @Field(() => String)
     id: string;
     @Column()
+    @Field(() => String)
     name: string;
     @Column()
+    @Field(() => Int)
     price: number;
     @Column()
+    @Field(() => String)
     description: string;
-    @Column()
+    @Column({ type: 'datetime', default: () => 'NOW()' })
+    @Field(() => Date)
     releaseDate: Date;
 
     @JoinTable()
