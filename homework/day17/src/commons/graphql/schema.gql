@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Model {
+  id: String!
+  model: String!
+  range: Int!
+  speed: Int!
+  zero100: Float!
+  price: Int!
+}
+
+type Query {
+  fetchModels: [Model!]!
+  fetchModel(modelId: String!): Model!
+}
+
+type Mutation {
+  createModel(createModelInput: CreateModelInput!): Model!
+  updateModel(modelId: String!, updateModelInput: UpdateModelInput!): Model!
+}
+
+input CreateModelInput {
+  model: String!
+  range: Int!
+  speed: Int!
+  zero100: Float!
+  price: Int!
+}
+
+input UpdateModelInput {
+  model: String
+  range: Int
+  speed: Int
+  zero100: Float
+  price: Int
+}
