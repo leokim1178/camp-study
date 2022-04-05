@@ -1,11 +1,7 @@
-function solution(x) {
-    var answer = true;
-    return answer;
+function finder(str, op) {
+   console.log(str.split("+"))
+    
 }
 
 
-
-a=3	
-b=5
-
-solution(a,b)
+finder("+-*%+","+")
