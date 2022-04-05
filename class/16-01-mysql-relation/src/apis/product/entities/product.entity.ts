@@ -9,7 +9,7 @@ import {
     JoinTable,
     ManyToMany,
     ManyToOne,
-    OneToOne,
+    OneToOne,   
     PrimaryGeneratedColumn,
 } from 'typeorm';
 
