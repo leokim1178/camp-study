@@ -17,7 +17,7 @@ function solution2(a, b) {
   return a[0];
 }
 
-function solution(a, b) {
+function solution3(a, b) {
   a.sort();
   b.sort();
   return a.filter((name, i) => {
