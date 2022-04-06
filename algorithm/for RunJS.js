@@ -1,7 +1,7 @@
-function finder(str, op) {
-   console.log(str.split("+"))
-    
+
+
+function isUnique(str) {
+console.log(str.split(""))
 }
 
-
-finder("+-*%+","+")
+isUnique('abcd')

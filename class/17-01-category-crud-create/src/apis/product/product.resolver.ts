@@ -12,7 +12,7 @@ export class ProductResolver {
     fetchProducts() {
         return this.productService.findAll();
     }
-    @Query(() => [Product])
+    @Query(() => Product)
     fetchProduct(
         @Args('productId')
         productId: string,
