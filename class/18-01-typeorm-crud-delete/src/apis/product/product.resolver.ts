@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateProductInput } from './dto/createProduct.input';
+import { CreateProductInput } from './dto/creatProduct.input';
 import { UpdateProductInput } from './dto/updateProduct.input';
 import { Product } from './entities/product.entity';
 import { ProductService } from './product.service';
@@ -40,5 +40,12 @@ export class ProductResolver {
             productId,
             updateProductInput,
         });
+    }
+    @Mutation(() => Boolean)
+    deleteProduct(
+        @Args('productId')
+        productId: string, //
+    ) {
+        return this.productService.delete({ productId });
     }
 }

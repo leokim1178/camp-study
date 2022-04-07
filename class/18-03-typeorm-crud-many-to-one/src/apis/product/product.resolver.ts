@@ -17,7 +17,7 @@ export class ProductResolver {
         @Args('productId')
         productId: string,
     ) {
-        this.productService.findOne({ productId });
+        return this.productService.findOne({ productId });
     }
 
     @Mutation(() => Product)
@@ -40,5 +40,12 @@ export class ProductResolver {
             productId,
             updateProductInput,
         });
+    }
+    @Mutation(() => Boolean)
+    deleteProduct(
+        @Args('productId')
+        productId: string, //
+    ) {
+        return this.productService.delete({ productId });
     }
 }
