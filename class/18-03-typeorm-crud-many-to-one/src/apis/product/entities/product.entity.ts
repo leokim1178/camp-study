@@ -47,6 +47,7 @@ export class Product {
     // @Field(() => Date)
     // deletedAt: Date;
     @DeleteDateColumn() //
+    @Field(() => Date)
     deletedAt: Date;
 
     @JoinColumn() //컬럼을 가지고 연결하겠다는 뜻... 기준이 있는곳에 이걸 둔다
