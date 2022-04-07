@@ -51,3 +51,52 @@ function solution2(answers) {
   }
   return answer;
 }
+
+//강사님 풀이1
+const answerTable = [
+  [1, 2, 3, 4, 5], //1번 수포자
+  [2, 1, 2, 3, 2, 4, 2, 5], //2번 수포자
+  [3, 3, 1, 1, 2, 2, 4, 4, 5, 5], //3번 수포자
+];
+
+function solution(answers) {
+  let answer = [0, 0, 0];
+
+  for (let i = 0; i < answers.length; i++) {
+    for (let l = 0; l < answerTable.length; l++) {
+      if (answerTable[l][i % answerTable[l].length] === answers[i]) {
+        answer[l]++;
+      }
+    }
+  }
+
+  const result = [];
+  answer.forEach((x, i) => {
+    if (x == Math.max(...answer)) {
+      result.push(i + 1);
+    }
+  });
+
+  return result;
+}
+
+//강사님 풀이2
+function solution(answers) {
+  const scoreList = answerTable.map((el, i) => {
+    const score = answers.reduce((acc, cur, l) => {
+      return acc + (el[l % el.length] === cur ? 1 : 0);
+    }, 0);
+    return { student: i + 1, score };
+  });
+
+  const biggest = Math.max(
+    ...scoreList.map((el) => {
+      return el.score;
+    })
+  );
+  return scoreList
+    .filter((el) => {
+      return el.score == biggest;
+    })
+    .map((el) => el.student);
+}
