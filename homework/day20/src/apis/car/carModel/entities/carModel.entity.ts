@@ -42,7 +42,7 @@ export class CarModel {
     @Field(() => String)
     wd: string;
 
-    @DeleteDateColumn() //
+    @DeleteDateColumn({ nullable: true }) //
     @Field(() => Date)
     deletedAt: Date;
 

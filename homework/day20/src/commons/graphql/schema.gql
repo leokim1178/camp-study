@@ -2,19 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Product {
-  id: String!
-  name: String!
-  price: Int!
-  description: String!
-  releaseDate: DateTime!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type CarType {
   id: String!
   type: String!
@@ -38,6 +25,11 @@ type CarModel {
   carTags: [CarTag!]!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type CarAuto {
   id: String!
   isAuto: Boolean!
@@ -60,13 +52,22 @@ type CarModelDetail {
   carModel: CarModel!
 }
 
+type User {
+  id: String!
+  email: String!
+  name: String!
+  address: String!
+  age: Int!
+  deletedAt: DateTime
+}
+
 type Query {
   fetchCarModels: [CarModel!]!
   fetchCarModel(carModelId: String!): CarModel!
   fetchCarModelDetails: [CarModelDetail!]!
   fetchCarWheels: [CarWheel!]!
-  fetchProducts: [Product!]!
-  fetchProduct(productId: String!): Product!
+  fetchUsers: [User!]!
+  fetchUser(userEmail: String!): User!
 }
 
 type Mutation {
@@ -76,10 +77,11 @@ type Mutation {
   restoreCarModel(carModelId: String!): Boolean!
   createCarModelDetail(createModelDetailInput: CreateModelDetailInput!): CarModelDetail!
   updateCarModelDetail(carModelDetailId: String!, updateModelDetailInput: UpdateModelDetailInput!): CarModelDetail!
-  createCarWheel(createCarWheelInput: CreateCarWheelInput!): CarWheel!
   createCarType(type: String!): CarType!
-  createProduct(createProductInput: CreateProductInput!): Product!
-  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!, userEmail: String!, userPassword: String!): User!
+  deleteUser(userEmail: String!, userPassword: String!): Boolean!
+  restoreUser(userEmail: String!, userPassword: String!): Boolean!
 }
 
 input CreateCarModelInput {
@@ -131,14 +133,18 @@ input UpdateModelDetailInput {
   carModelId: String
 }
 
-input CreateProductInput {
+input CreateUserInput {
+  email: String!
+  password: String!
   name: String!
-  price: Int!
-  description: String!
+  address: String!
+  age: Int!
 }
 
-input UpdateProductInput {
+input UpdateUserInput {
+  email: String
+  password: String
   name: String
-  price: Int
-  description: String
+  address: String
+  age: Int
 }
