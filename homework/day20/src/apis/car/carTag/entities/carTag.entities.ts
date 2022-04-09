@@ -1,10 +1,10 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Product } from 'src/apis/product/entities/product.entity';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { CarModel } from '../../carModel/entities/carModel.entity';
 
 @Entity() //Entity라는 함수 안에 내부를 table로 만들어주는 기능이 내장되어 있다
 @ObjectType()
-export class ProductTag {
+export class CarTag {
     @PrimaryGeneratedColumn('uuid')
     @Field(() => String)
     id: string;
@@ -12,8 +12,8 @@ export class ProductTag {
     @Column()
     @Field(() => String)
     name: string;
-    
-    @ManyToMany(() => Product, (products) => products.productTags)
-    @Field(() => [Product])
-    product: Product[];
+
+    @ManyToMany(() => CarModel, (cars) => cars.carTags)
+    @Field(() => [CarModel])
+    carModel: CarModel[];
 }

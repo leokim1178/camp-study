@@ -1,0 +1,90 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: String!
+  name: String!
+  price: Int!
+  description: String!
+  releaseDate: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CarType {
+  id: String!
+  type: String!
+}
+
+type CarModel {
+  id: String!
+  name: String!
+  range: Int!
+  speed: Int!
+  zero100: Float!
+  price: Int!
+  color: String!
+  intColor: String!
+  wd: String!
+  seatSize: Int!
+  deletedAt: DateTime!
+}
+
+type Query {
+  fetchCarModels: [CarModel!]!
+  fetchCarModel(carModelId: String!): CarModel!
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
+}
+
+type Mutation {
+  createCarModel(createCarModelInput: CreateCarModelInput!): CarModel!
+  updateCarModel(carModelId: String!, updateCarModelInput: UpdateCarModelInput!): CarModel!
+  deleteCarModel(carModelId: String!): Boolean!
+  restoreCarModel(carModelId: String!): Boolean!
+  createCarType(type: String!): CarType!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+}
+
+input CreateCarModelInput {
+  name: String!
+  range: Int!
+  speed: Int!
+  zero100: Float!
+  price: Int!
+  color: String!
+  intColor: String!
+  wd: String!
+  seatSize: Int!
+  carTypeId: String!
+}
+
+input UpdateCarModelInput {
+  name: String
+  range: Int
+  speed: Int
+  zero100: Float
+  price: Int
+  color: String
+  intColor: String
+  wd: String
+  seatSize: Int
+  carTypeId: String
+}
+
+input CreateProductInput {
+  name: String!
+  price: Int!
+  description: String!
+}
+
+input UpdateProductInput {
+  name: String
+  price: Int
+  description: String
+}
