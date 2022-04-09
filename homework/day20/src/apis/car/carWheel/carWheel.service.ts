@@ -12,9 +12,4 @@ export class CarWheelService {
     async findAll() {
         return await this.carWheelRepository.find();
     }
-    async create({ createCarWheelInput }) {
-        return await this.carWheelRepository.save({
-            ...createCarWheelInput,
-        });
-    }
 }

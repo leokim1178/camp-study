@@ -36,5 +36,6 @@ export class CarModelDetail {
     carAuto: CarAuto;
 
     @ManyToOne(() => CarModel)
+    @Field(() => CarModel)
     carModel: CarModel;
 }

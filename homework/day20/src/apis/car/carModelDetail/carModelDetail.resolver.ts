@@ -11,7 +11,7 @@ export class CarModelDetailResolver {
     ) {}
 
     @Query(() => [CarModelDetail])
-    fetchCarModels() {
+    fetchCarModelDetails() {
         return this.carModelDetailService.findAll();
     }
 
@@ -24,13 +24,13 @@ export class CarModelDetailResolver {
     }
 
     @Mutation(() => CarModelDetail)
-    async updateProduct(
+    updateCarModelDetail(
         @Args('carModelDetailId')
         carModelDetailId: string, //
-        @Args('updateInput')
+        @Args('updateModelDetailInput')
         updateModelDetailInput: UpdateModelDetailInput, //
     ) {
-        return await this.carModelDetailService.update({
+        return this.carModelDetailService.update({
             carModelDetailId,
             updateModelDetailInput,
         });

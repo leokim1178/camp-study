@@ -15,14 +15,14 @@ export class CarModelService {
 
     async findAll() {
         return await this.carModelRepository.find({
-            relations: ['carType'],
+            relations: ['carType', 'carTags'],
             withDeleted: true,
         });
     }
     async findOne({ carModelId }) {
         return await this.carModelRepository.findOne({
             where: { id: carModelId },
-            relations: ['carType'],
+            relations: ['carType', 'carTags'],
             withDeleted: true,
         });
     }

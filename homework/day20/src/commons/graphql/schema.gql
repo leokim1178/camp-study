@@ -57,11 +57,14 @@ type CarModelDetail {
   interior: String!
   carWheel: CarWheel!
   carAuto: CarAuto!
+  carModel: CarModel!
 }
 
 type Query {
-  fetchCarModels: [CarWheel!]!
+  fetchCarModels: [CarModel!]!
   fetchCarModel(carModelId: String!): CarModel!
+  fetchCarModelDetails: [CarModelDetail!]!
+  fetchCarWheels: [CarWheel!]!
   fetchProducts: [Product!]!
   fetchProduct(productId: String!): Product!
 }
@@ -72,11 +75,11 @@ type Mutation {
   deleteCarModel(carModelId: String!): Boolean!
   restoreCarModel(carModelId: String!): Boolean!
   createCarModelDetail(createModelDetailInput: CreateModelDetailInput!): CarModelDetail!
-  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
-  createCarAuto(isAuto: String!, price: Float!): CarAuto!
+  updateCarModelDetail(carModelDetailId: String!, updateModelDetailInput: UpdateModelDetailInput!): CarModelDetail!
   createCarWheel(createCarWheelInput: CreateCarWheelInput!): CarWheel!
   createCarType(type: String!): CarType!
   createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
 }
 
 input CreateCarModelInput {
@@ -120,14 +123,22 @@ input CreateCarAutoInput {
   price: Int!
 }
 
-input UpdateProductInput {
-  name: String
-  price: Int
-  description: String
+input UpdateModelDetailInput {
+  color: String
+  interior: String
+  carWheel: CreateCarWheelInput
+  carAuto: CreateCarAutoInput
+  carModelId: String
 }
 
 input CreateProductInput {
   name: String!
   price: Int!
   description: String!
+}
+
+input UpdateProductInput {
+  name: String
+  price: Int
+  description: String
 }

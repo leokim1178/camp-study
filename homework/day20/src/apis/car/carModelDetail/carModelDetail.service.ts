@@ -19,7 +19,11 @@ export class CarModelDetailService {
         private readonly carModelRepository: Repository<CarModel>,
     ) {}
     async findAll() {
-        return await this.carModelDetailRepository.find();
+        const result = await this.carModelDetailRepository.find({
+            relations: ['carAuto', 'carModel', 'carWheel'],
+        });
+
+        return result;
     }
     async create({ createModelDetailInput }) {
         const {
@@ -28,37 +32,37 @@ export class CarModelDetailService {
             carModelId,
             ...detail
         } = createModelDetailInput;
-        console.log(createModelDetailInput);
 
         let wheelResult;
 
         const wheelFind = await this.carWheelRepository.findOne({
             where: {
                 size: carWheel.size,
+                name: carWheel.name,
             },
         });
-        console.log(wheelFind);
+
         if (wheelFind) {
             wheelResult = wheelFind;
         } else {
             wheelResult = await this.carWheelRepository.save({
-                ...wheelFind,
+                ...carWheel, //
             });
         }
-        console.log(wheelResult);
 
         let autoResult;
         const autoFind = await this.carAutoRepository.findOne({
-            ...carAuto,
+            where: {
+                isAuto: carAuto.isAuto,
+            },
         });
         if (autoFind) {
             autoResult = autoFind;
         } else {
             autoResult = await this.carAutoRepository.save({
-                ...autoFind,
+                ...carAuto,
             });
         }
-        console.log(autoResult);
 
         const modelResult = await this.carModelRepository.findOne({
             where: {
