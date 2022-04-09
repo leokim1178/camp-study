@@ -5,10 +5,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductModule } from './apis/product/product/product.module';
 import { CarModelModule } from './apis/car/carModel/carModel.module';
 import { CarTypeModule } from './apis/car/carType/carType.module';
+import { CarModelDetailModule } from './apis/car/carModelDetail/carModelDetail.module';
+import { CarAutoModule } from './apis/car/carAuto/carAuto.module';
+import { CarWheelModule } from './apis/car/carWheel/carWheel.module';
 
 @Module({
     imports: [
         CarModelModule,
+        CarModelDetailModule,
+        CarAutoModule,
+        CarWheelModule,
         CarTypeModule,
         ProductModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({

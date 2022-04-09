@@ -20,22 +20,47 @@ type CarType {
   type: String!
 }
 
-type CarModel {
+type CarTag {
   id: String!
   name: String!
+  carModel: [CarModel!]!
+}
+
+type CarModel {
+  id: String!
+  model: String!
   range: Int!
   speed: Int!
   zero100: Float!
   price: Int!
-  color: String!
-  intColor: String!
   wd: String!
-  seatSize: Int!
   deletedAt: DateTime!
+  carTags: [CarTag!]!
+}
+
+type CarAuto {
+  id: String!
+  isAuto: Boolean!
+  price: Int!
+}
+
+type CarWheel {
+  id: String!
+  name: String!
+  size: Int!
+  price: Float!
+}
+
+type CarModelDetail {
+  id: String!
+  color: String!
+  interior: String!
+  carWheel: CarWheel!
+  carAuto: CarAuto!
 }
 
 type Query {
-  fetchCarModels: [CarModel!]!
+  fetchCarModels: [CarWheel!]!
   fetchCarModel(carModelId: String!): CarModel!
   fetchProducts: [Product!]!
   fetchProduct(productId: String!): Product!
@@ -46,45 +71,63 @@ type Mutation {
   updateCarModel(carModelId: String!, updateCarModelInput: UpdateCarModelInput!): CarModel!
   deleteCarModel(carModelId: String!): Boolean!
   restoreCarModel(carModelId: String!): Boolean!
+  createCarModelDetail(createModelDetailInput: CreateModelDetailInput!): CarModelDetail!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  createCarAuto(isAuto: String!, price: Float!): CarAuto!
+  createCarWheel(createCarWheelInput: CreateCarWheelInput!): CarWheel!
   createCarType(type: String!): CarType!
   createProduct(createProductInput: CreateProductInput!): Product!
-  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
 }
 
 input CreateCarModelInput {
-  name: String!
+  model: String!
   range: Int!
   speed: Int!
   zero100: Float!
   price: Int!
-  color: String!
-  intColor: String!
   wd: String!
-  seatSize: Int!
   carTypeId: String!
+  carTags: [String!]!
 }
 
 input UpdateCarModelInput {
-  name: String
+  model: String
   range: Int
   speed: Int
   zero100: Float
   price: Int
-  color: String
-  intColor: String
   wd: String
-  seatSize: Int
   carTypeId: String
+  carTags: [String!]
 }
 
-input CreateProductInput {
+input CreateModelDetailInput {
+  color: String!
+  interior: String!
+  carWheel: CreateCarWheelInput!
+  carAuto: CreateCarAutoInput!
+  carModelId: String!
+}
+
+input CreateCarWheelInput {
   name: String!
+  size: Int!
+  price: Float!
+}
+
+input CreateCarAutoInput {
+  isAuto: Boolean!
   price: Int!
-  description: String!
 }
 
 input UpdateProductInput {
   name: String
   price: Int
   description: String
+}
+
+input CreateProductInput {
+  name: String!
+  price: Int!
+  description: String!
 }

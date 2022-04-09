@@ -28,11 +28,16 @@ export class CarModelDetailService {
             carModelId,
             ...detail
         } = createModelDetailInput;
+        console.log(createModelDetailInput);
 
         let wheelResult;
+
         const wheelFind = await this.carWheelRepository.findOne({
-            ...carWheel,
+            where: {
+                size: carWheel.size,
+            },
         });
+        console.log(wheelFind);
         if (wheelFind) {
             wheelResult = wheelFind;
         } else {
@@ -40,6 +45,7 @@ export class CarModelDetailService {
                 ...wheelFind,
             });
         }
+        console.log(wheelResult);
 
         let autoResult;
         const autoFind = await this.carAutoRepository.findOne({
@@ -52,6 +58,8 @@ export class CarModelDetailService {
                 ...autoFind,
             });
         }
+        console.log(autoResult);
+
         const modelResult = await this.carModelRepository.findOne({
             where: {
                 id: carModelId,

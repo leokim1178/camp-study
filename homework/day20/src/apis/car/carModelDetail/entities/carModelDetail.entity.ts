@@ -6,6 +6,7 @@ import {
     ManyToOne,
     OneToOne,
     PrimaryColumn,
+    PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CarAuto } from '../../carAuto/entities/carAuto.entity';
 import { CarModel } from '../../carModel/entities/carModel.entity';
@@ -14,9 +15,9 @@ import { CarWheel } from '../../carWheel/entities/carWheel.entity';
 @Entity()
 @ObjectType()
 export class CarModelDetail {
-    @PrimaryColumn()
-    @Field(() => Number)
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    @Field(() => String)
+    id: string;
     @Column()
     @Field(() => String)
     color: string;

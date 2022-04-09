@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CarTag } from '../carTag/entities/carTag.entities';
+import { CarTag } from '../carTag/entities/carTag.entity';
 import { CarModel } from './entities/carModel.entity';
 
 @Injectable()
@@ -28,11 +28,29 @@ export class CarModelService {
     }
 
     async create({ createCarModelInput }) {
-        const { carTypeId, ...carModel } = createCarModelInput; //구조분해할당
+        const { carTypeId, carTags, ...carModel } = createCarModelInput; //구조분해할당
 
+        const tagResult = [];
+        for (let i = 0; i < carTags.length; i++) {
+            const tagname = carTags[i].replace('#', '');
+            const prevtag = await this.carTagRepository.findOne({
+                where: {
+                    name: tagname,
+                },
+            });
+            if (prevtag) {
+                tagResult.push(prevtag);
+            } else {
+                const newtag = await this.carTagRepository.save({
+                    name: tagname,
+                });
+                tagResult.push(newtag);
+            }
+        }
         return await this.carModelRepository.save({
             ...carModel, //{id:result.id} 이렇게하면 못받을수 있다 그냥 통으로 넘기는게 좋다
             carType: { id: carTypeId },
+            carTags: tagResult,
         });
     }
     async update({ carModelId, updateCarModelInput }) {

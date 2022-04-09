@@ -5,9 +5,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @ObjectType()
 export class CarType {
     @PrimaryGeneratedColumn('uuid')
-    @Field()
+    @Field(() => String)
     id: string;
     @Column()
-    @Field()
+    @Field(() => String)
     type: string;
 }

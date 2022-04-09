@@ -11,7 +11,6 @@ export class CreateModelDetailInput {
 
     @Field(() => CreateCarWheelInput)
     carWheel: CreateCarWheelInput;
-
     @Field(() => CreateCarAutoInput)
     carAuto: CreateCarAutoInput;
 

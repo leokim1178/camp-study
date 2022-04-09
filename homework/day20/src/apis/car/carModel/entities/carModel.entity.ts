@@ -9,7 +9,7 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { CarTag } from '../../carTag/entities/carTag.entities';
+import { CarTag } from '../../carTag/entities/carTag.entity';
 
 @Entity()
 @ObjectType()
