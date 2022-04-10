@@ -1,20 +1,37 @@
-function topsyTurvy(str, arr) {
+function solution(board, moves) {
+ let arr = []
+  for(k=0;k<moves.length; k++){
+    console.log(moves[k])
+    
+    for(i=0;i<board.length;i++){
 
- let answer =""
- for(i=0; i<arr.length;i++){
-   let idx= arr.indexOf(i)
-   console.log(idx)
-   answer +=str[idx]
- }
- return answer
- 
-}
+					if(board[i][moves[k]-1]){
+            if(board[i][moves[k]-1]!==arr[k-1]){
+                          board[i][moves[k]-1]=0
+
+            }else{
+            arr.push(board[i][moves[k]-1])
+            board[i][moves[k]-1]=0
+            break}
+          }
+    }
+  }
   
+  
+  	console.log(arr)
+}
 
+solution(
+  [
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 3],
+    [0, 2, 5, 0, 1],
+    [4, 2, 4, 4, 2],
+    [3, 5, 1, 3, 1],
+  ],
+  [1, 5, 3, 5, 1, 2, 1, 4]
+); //4
 
+[4,3,1,1,3,2,4]
 
-
-
-
-topsyTurvy('campcode', [4, 5, 6, 7, 0, 1, 2, 3]) //'codecamp'
-topsyTurvy('bsktcaurs', [4, 8, 7, 1, 6, 2, 5, 3, 0]) // 'starbucks'
+// board[i][moves[k]-1]!==arr[k-1]
