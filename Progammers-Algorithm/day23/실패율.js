@@ -1,29 +1,23 @@
 function solution(N, stages) {
-  let arr = new Array(N).fill(0);
+  //실패율 구하기
+  let arr = [];
+  let challengers = stages.length;
+  //실패율 =  스테이지에 도달했으나 클리어하지 못한 플레이어수 /스테이지에 도달한 플레이어수
   for (i = 1; i <= N; i++) {
-    for (j = 0; j < stages.length; j++) {
-      if (stages[j] == i) {
-        arr[i - 1]++;
-      }
-    }
+    const winners = stages.filter((x, j) => {
+      return x == i;
+    }).length;
+    let obj = {};
+    obj.percent = winners / challengers;
+    obj.number = i;
+    arr.push(obj);
+    challengers -= winners;
   }
-  console.log(arr);
-  let deno = stages.length;
-  const per = arr.map((x, i) => {
-    let devide = deno;
-    deno -= x;
-    return x / devide;
+  arr.sort((x, y) => {
+    return y.percent - x.percent;
   });
-  console.log(per);
-  const per2 = [...per];
-  let answer = [];
-  per2.sort((a, b) => {
-    return b - a;
+  const answer = arr.map((x) => {
+    return x.number;
   });
-  console.log(per2);
-  console.log(per2.indexOf(per[0]));
-  for (i = 0; i < per.length; i++) {
-    answer.push(per2.indexOf(per[i]) + 1);
-  }
-  console.log(answer);
+  return answer;
 }
