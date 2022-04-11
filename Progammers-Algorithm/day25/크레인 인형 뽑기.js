@@ -12,12 +12,12 @@ function solution(board, moves) {
 
     for (j = 0; j < arr.length; j++) {
       if (arr[j] == arr[j + 1]) {
-        answer.push(arr.splice(j, 2));
+        answer.push(...arr.splice(j, 2));
       }
     }
   }
 
-  return answer.flat().length;
+  return answer.length;
 }
 
 solution(
