@@ -1,0 +1,144 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CarType {
+  id: String!
+  type: String!
+}
+
+type CarTag {
+  id: String!
+  name: String!
+  carModel: [CarModel!]!
+}
+
+type CarModel {
+  id: String!
+  model: String!
+  range: Int!
+  speed: Int!
+  zero100: Float!
+  price: Int!
+  wd: String!
+  deletedAt: DateTime!
+  carTags: [CarTag!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CarAuto {
+  id: String!
+  isAuto: Boolean!
+  price: Int!
+}
+
+type CarWheel {
+  id: String!
+  name: String!
+  size: Int!
+  price: Float!
+}
+
+type CarModelDetail {
+  id: String!
+  color: String!
+  interior: String!
+  carWheel: CarWheel!
+  carAuto: CarAuto!
+  carModel: CarModel!
+}
+
+type User {
+  id: String!
+  email: String!
+  name: String!
+  address: String!
+  age: Int!
+  deletedAt: DateTime
+}
+
+type Query {
+  fetchCarModels: [CarModel!]!
+  fetchCarModel(carModelId: String!): CarModel!
+  fetchCarModelDetails: [CarModelDetail!]!
+  fetchCarWheels: [CarWheel!]!
+  fetchUsers: [User!]!
+  fetch: String!
+  fetchUser(userEmail: String!): User!
+}
+
+type Mutation {
+  createCarModel(createCarModelInput: CreateCarModelInput!): CarModel!
+  updateCarModel(carModelId: String!, updateCarModelInput: UpdateCarModelInput!): CarModel!
+  deleteCarModel(carModelId: String!): Boolean!
+  restoreCarModel(carModelId: String!): Boolean!
+  createCarModelDetail(createModelDetailInput: CreateModelDetailInput!): CarModelDetail!
+  updateCarModelDetail(carModelDetailId: String!, updateModelDetailInput: UpdateModelDetailInput!): CarModelDetail!
+  createCarType(type: String!): CarType!
+  login(email: String!, password: String!): String!
+  createUser(email: String!, password: String!, name: String!, address: String!, age: Float!): User!
+  updateUser(updateUserInput: UpdateUserInput!, userEmail: String!, userPassword: String!): User!
+  deleteUser(userEmail: String!, userPassword: String!): Boolean!
+  restoreUser(userEmail: String!, userPassword: String!): Boolean!
+}
+
+input CreateCarModelInput {
+  model: String!
+  range: Int!
+  speed: Int!
+  zero100: Float!
+  price: Int!
+  wd: String!
+  carTypeId: String!
+  carTags: [String!]!
+}
+
+input UpdateCarModelInput {
+  model: String
+  range: Int
+  speed: Int
+  zero100: Float
+  price: Int
+  wd: String
+  carTypeId: String
+  carTags: [String!]
+}
+
+input CreateModelDetailInput {
+  color: String!
+  interior: String!
+  carWheel: CreateCarWheelInput!
+  carAuto: CreateCarAutoInput!
+  carModelId: String!
+}
+
+input CreateCarWheelInput {
+  name: String!
+  size: Int!
+  price: Float!
+}
+
+input CreateCarAutoInput {
+  isAuto: Boolean!
+  price: Int!
+}
+
+input UpdateModelDetailInput {
+  color: String
+  interior: String
+  carWheel: CreateCarWheelInput
+  carAuto: CreateCarAutoInput
+  carModelId: String
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  name: String
+  address: String
+  age: Int
+}
