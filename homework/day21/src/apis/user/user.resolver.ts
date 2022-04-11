@@ -11,12 +11,6 @@ import { GqlAuthAccessGuard } from 'src/commons/auth/gql-auth-guard';
 export class UserResolver {
     constructor(private readonly userService: UserService) {}
 
-    //전체 유저 조회
-    @Query(() => [User])
-    fetchUsers() {
-        return this.userService.findAll();
-    }
-
     @UseGuards(GqlAuthAccessGuard)
     @Query(() => String)
     fetch(
@@ -27,14 +21,27 @@ export class UserResolver {
         console.log(currentUser);
         return 'asdf';
     }
+    //전체 유저 조회
+    @UseGuards(GqlAuthAccessGuard)
+    @Query(() => [User])
+    fetchUsers(
+        @CurrentUser()
+        currentUser: any,
+    ) {
+        console.log(currentUser, '님이 로그인 중');
+        return this.userService.findAll();
+    }
 
     //이메일로 유저 조회
+    @UseGuards(GqlAuthAccessGuard)
     @Query(() => User)
-    fetchUser(
-        @Args('userEmail')
-        userEmail: string,
+    async fetchUser(
+        @CurrentUser()
+        currentUser: any,
+        @Args('email')
+        email: string,
     ) {
-        return this.userService.findOne({ userEmail });
+        return this.userService.findOne({ email });
     }
 
     //유저 생성
@@ -64,37 +71,41 @@ export class UserResolver {
     }
 
     //유저정보 업데이트
+    @UseGuards(GqlAuthAccessGuard)
     @Mutation(() => User)
-    updateUser(
+    async updateUser(
         @Args('updateUserInput')
         updateUserInput: UpdateUserInput,
-        @Args('userEmail')
-        userEmail: string,
-        @Args('userPassword')
-        userPassword: string,
+        @CurrentUser()
+        currentUser: any,
+        @Args('email')
+        email: string,
     ) {
         return this.userService.update({
             updateUserInput,
-            userEmail,
-            userPassword,
+            email,
         });
     }
+
+    @UseGuards(GqlAuthAccessGuard)
     @Mutation(() => Boolean)
-    deleteUser(
-        @Args('userEmail')
-        userEmail: string,
-        @Args('userPassword')
-        userPassword: string,
+    async deleteUser(
+        @CurrentUser()
+        currentUser: any,
+        @Args('email')
+        email: string,
     ) {
-        return this.userService.delete({ userEmail, userPassword });
+        return this.userService.delete({ email });
     }
+
+    @UseGuards(GqlAuthAccessGuard)
     @Mutation(() => Boolean)
-    restoreUser(
-        @Args('userEmail')
-        userEmail: string,
-        @Args('userPassword')
-        userPassword: string,
+    async restoreUser(
+        @CurrentUser()
+        currentUser: any,
+        @Args('email')
+        email: string,
     ) {
-        return this.userService.restore({ userEmail, userPassword });
+        return this.userService.restore({ email });
     }
 }

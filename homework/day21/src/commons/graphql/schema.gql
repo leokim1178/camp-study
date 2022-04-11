@@ -66,9 +66,9 @@ type Query {
   fetchCarModel(carModelId: String!): CarModel!
   fetchCarModelDetails: [CarModelDetail!]!
   fetchCarWheels: [CarWheel!]!
-  fetchUsers: [User!]!
   fetch: String!
-  fetchUser(userEmail: String!): User!
+  fetchUsers: [User!]!
+  fetchUser(email: String!): User!
 }
 
 type Mutation {
@@ -81,9 +81,9 @@ type Mutation {
   createCarType(type: String!): CarType!
   login(email: String!, password: String!): String!
   createUser(email: String!, password: String!, name: String!, address: String!, age: Float!): User!
-  updateUser(updateUserInput: UpdateUserInput!, userEmail: String!, userPassword: String!): User!
-  deleteUser(userEmail: String!, userPassword: String!): Boolean!
-  restoreUser(userEmail: String!, userPassword: String!): Boolean!
+  updateUser(updateUserInput: UpdateUserInput!, email: String!): User!
+  deleteUser(email: String!): Boolean!
+  restoreUser(email: String!): Boolean!
 }
 
 input CreateCarModelInput {

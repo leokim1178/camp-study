@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -16,10 +17,10 @@ export class UserService {
         });
     }
     //이메일로 유저 조회
-    async findOne({ userEmail }) {
+    async findOne({ email }) {
         return await this.userRepository.findOne({
             where: {
-                email: userEmail,
+                email,
             },
             withDeleted: true,
         });
@@ -42,42 +43,32 @@ export class UserService {
     }
 
     //유저정보 업데이트
-    async update({ updateUserInput, userEmail, userPassword }) {
+    async update({ updateUserInput, email }) {
         const prevUser = await this.userRepository.findOne({
-            where: { email: userEmail },
+            where: { email },
         });
-        if (prevUser.password == userPassword)
-            return await this.userRepository.save({
-                prevUser,
-                ...updateUserInput,
-            });
-        else throw new ConflictException('비밀번호가 일치하지 않습니다');
+        const hashedPW = //
+            await bcrypt.hash(updateUserInput.password, 10).then((res) => res);
+        return await this.userRepository.save({
+            ...prevUser,
+            ...updateUserInput,
+            password: hashedPW,
+        });
     }
 
     //유저정보 삭제(softDelete)
-    async delete({ userEmail, userPassword }) {
-        const findUser = await this.userRepository.findOne({
-            where: { email: userEmail },
+    async delete({ email }) {
+        const result = await this.userRepository.softDelete({
+            email,
         });
-        if (findUser.password == userPassword) {
-            const result = await this.userRepository.softDelete({
-                email: userEmail,
-            });
-            return result.affected ? true : false;
-        } else throw new ConflictException('비밀번호가 일치하지 않습니다!');
+        return result.affected ? true : false;
     }
 
     //유저정보 복구
-    async restore({ userEmail, userPassword }) {
-        const findUser = await this.userRepository.findOne({
-            where: { email: userEmail },
-            withDeleted: true,
+    async restore({ email }) {
+        const result = await this.userRepository.restore({
+            email,
         });
-        if (findUser.deletedAt && findUser.password == userPassword) {
-            const result = await this.userRepository.restore({
-                email: userEmail,
-            });
-            return result.affected ? true : false;
-        }
+        return result.affected ? true : false;
     }
 }

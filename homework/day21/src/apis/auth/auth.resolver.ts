@@ -14,12 +14,12 @@ export class AuthResolver {
     @Mutation(() => String)
     async login(
         @Args('email') //
-        userEmail: string,
+        email: string,
         @Args('password')
         password: string,
     ) {
         //1. 로그인(이메일과 비밀번호가 일치하는 유저 찾기)
-        const user = await this.userService.findOne({ userEmail });
+        const user = await this.userService.findOne({ email });
         //2. 일치하는 유저가 없으면? 에러 던지기
         if (!user)
             throw new UnprocessableEntityException(
