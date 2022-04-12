@@ -17,3 +17,32 @@ function solution(nums) {
   });
   return result.length;
 }
+
+function solution(nums) {
+  let answer = 0;
+  let idx = 0;
+  nums.forEach((num1, i) => {
+    idx = i + 1;
+    nums.slice(idx).forEach((num2) => {
+      console.log(num1, num2);
+      idx++;
+      nums.slice(idx).forEach((num3) => {
+        const sum = num1 + num2 + num3;
+        let count = 0;
+        for (let j = 0; j <= sum; j++) {
+          if (sum % j === 0) {
+            count++;
+          }
+          if (count > 2) {
+            break;
+          }
+        }
+        if (count === 2) {
+          answer++;
+        }
+      });
+    });
+  });
+
+  return answer;
+}
