@@ -1,16 +1,27 @@
-function seatNumber(row, col) {
-  let answer = Array.from(Array(row), () => Array(col).fill(1));
-  console.log(answer)
-  for(i=0;i<row; i++){
-    for(j=0; j<col; j++){
-			if(j=0){
-      answer[i][j]+=i+j+col*i}
-      else{
-        answer[i][j]
-      }
-    }
+
+
+function solution(s) {
+  let zero = 0
+  let result = 0
+	let string = s
+  
+  for(let k=0;k<5;k++){
+	let lng=string.split("").filter(x=>x!=0).length
+  zero += string.length-lng
+  let tr = ""
+  for(let i=0; lng/(2**i)>0;i++){
+    tr +=lng%2
+    lng = Math.floor(lng/2)
   }
-  console.log(answer)
+  s= tr.split('').reverse().join("")
+   result ++   
+   
+    if(s==0){break}
+  
+  }
+  
+  
+   console.log(result)
   
 }
 
@@ -18,4 +29,11 @@ function seatNumber(row, col) {
 
 
 
-seatNumber(3,5)
+
+
+
+
+
+solution("110010101001")
+// solution("01110")
+// solution("1111111")
