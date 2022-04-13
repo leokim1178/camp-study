@@ -9,6 +9,6 @@ export class CreateUserInput {
     @Field(() => String)
     name: string;
 
-    @Field(() => Int)
-    age: number;
+    @Field(() => String)
+    age: string;
 }

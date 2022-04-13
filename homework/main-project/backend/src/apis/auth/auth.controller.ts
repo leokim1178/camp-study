@@ -22,6 +22,7 @@ export class AuthController {
         @Req() req: Request & IOAuthUser, //  & 는 두개를 더하는 것
         @Res() res: Response,
     ) {
+        console.log(req);
         //1. 가입확인
         let user = await this.userService.findOne({ email: req.user.email });
         // const hashedPW = //
@@ -42,6 +43,33 @@ export class AuthController {
 
         res.redirect(
             'http://127.0.0.1:5501/main-project/frontend/login/index.html',
+        );
+    }
+
+    @Get('/login/naver')
+    @UseGuards(AuthGuard('naver'))
+    async loginNaver(
+        @Req()
+        req: Request & IOAuthUser,
+        @Res()
+        res: Response,
+    ) {
+        let user = await this.userService.findOne({
+            email: req.user.email,
+        });
+        if (!user) {
+            user = await this.userService.create({
+                email: req.user.email,
+                hashedPW: req.user.password,
+                name: req.user.name,
+                age: req.user.age,
+            });
+        }
+
+        this.authService.setRefreshToken({ user, res });
+
+        res.redirect(
+            'http://localhost:5500/homework/main-project/frontend/login/index.html',
         );
     }
 }

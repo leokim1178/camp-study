@@ -55,7 +55,7 @@ export class UserResolver {
         name: string,
 
         @Args('age')
-        age: number,
+        age: string,
     ) {
         const hashedPW = //
             await bcrypt.hash(password, 10).then((res) => res);
