@@ -22,28 +22,7 @@ export class AuthController {
         @Req() req: Request & IOAuthUser, //  & 는 두개를 더하는 것
         @Res() res: Response,
     ) {
-        console.log(req);
-        //1. 가입확인
-        let user = await this.userService.findOne({ email: req.user.email });
-        // const hashedPW = //
-        //     await bcrypt.hash(req.user.password, 10).then((res) => res);
-        //2. 회원가입
-        if (!user) {
-            user = await this.userService.create({
-                email: req.user.email,
-                hashedPW: req.user.password,
-                name: req.user.name,
-                age: req.user.age, //스프레드 연산자 써도됨
-            });
-        }
-
-        //3. 로그인
-        //로그인 시키는 것 : access와 refresh 두개 던지기
-        this.authService.setRefreshToken({ user, res });
-
-        res.redirect(
-            'http://127.0.0.1:5501/main-project/frontend/login/index.html',
-        );
+        this.authService.socialLogin({ req, res });
     }
 
     @Get('/login/naver')
@@ -54,22 +33,45 @@ export class AuthController {
         @Res()
         res: Response,
     ) {
-        let user = await this.userService.findOne({
-            email: req.user.email,
-        });
-        if (!user) {
-            user = await this.userService.create({
-                email: req.user.email,
-                hashedPW: req.user.password,
-                name: req.user.name,
-                age: req.user.age,
-            });
-        }
-
-        this.authService.setRefreshToken({ user, res });
-
-        res.redirect(
-            'http://localhost:5500/homework/main-project/frontend/login/index.html',
-        );
+        this.authService.socialLogin({ req, res });
     }
+
+    @Get('/login/kakao')
+    @UseGuards(AuthGuard('kakao'))
+    async loginKakao(
+        @Req()
+        req: Request & IOAuthUser,
+        @Res()
+        res: Response,
+    ) {
+        this.authService.socialLogin({ req, res });
+    }
+
+    // @Get([`/login/kakao`, '/login/naver', '/login/google'])
+    // @UseGuards(AuthGuard(['kakao', 'naver', 'google']))
+    // async loginSocial(
+    //     @Req()
+    //     req: Request & IOAuthUser,
+    //     @Res()
+    //     res: Response,
+    // ) {
+    // console.log(req.route.path.replace('/login/', ''));
+    //     let user = await this.userService.findOne({
+    //         email: req.user.email,
+    //     });
+    //     if (!user) {
+    //         user = await this.userService.create({
+    //             email: req.user.email,
+    //             hashedPW: req.user.password,
+    //             name: req.user.name,
+    //             age: req.user.age,
+    //         });
+    //     }
+
+    //     this.authService.setRefreshToken({ user, res });
+
+    //     res.redirect(
+    //         'http://localhost:5501/main-project/frontend/login/index.html',
+    //     );
+    // }
 }
