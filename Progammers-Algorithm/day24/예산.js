@@ -10,3 +10,16 @@ function solution(d, budget) {
   }, 0);
   return answer;
 }
+
+function solution(d, budget) {
+  const answer = d
+    .sort((a, b) => a - b)
+    .filter((money) => {
+      budget -= money;
+      console.log(budget);
+      if (budget >= 0) {
+        return money;
+      }
+    });
+  return answer.length;
+}
