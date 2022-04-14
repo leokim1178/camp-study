@@ -58,6 +58,21 @@ type User {
   name: String!
   age: String!
   deletedAt: DateTime
+  point: Int!
+}
+
+type Payment {
+  id: String!
+  impUid: String!
+  amount: Int!
+  status: PAYMENT_STATUS_ENUM!
+  user: User!
+  createdAt: DateTime!
+}
+
+enum PAYMENT_STATUS_ENUM {
+  PAYMENT
+  CANCEL
 }
 
 type Query {
@@ -80,6 +95,7 @@ type Mutation {
   createCarType(type: String!): CarType!
   login(email: String!, password: String!): String!
   restoreAccessToken: String!
+  createPayment(impUid: String!, amount: Float!): Payment!
   createUser(email: String!, password: String!, name: String!, age: String!): User!
   updateUser(updateUserInput: UpdateUserInput!, email: String!): User!
   deleteUser(email: String!): Boolean!

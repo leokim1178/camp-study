@@ -10,6 +10,7 @@ import { CarModelDetailModule } from './apis/car/carModelDetail/carModelDetail.m
 import { CarWheelModule } from './apis/car/carWheel/carWheel.module';
 import { UserModule } from './apis/user/user.module';
 import { AuthModule } from './apis/auth/auth.module';
+import { PaymentModule } from './apis/payment/payment.module';
 
 @Module({
     imports: [
@@ -17,8 +18,9 @@ import { AuthModule } from './apis/auth/auth.module';
         CarModelDetailModule,
         CarWheelModule,
         CarTypeModule,
-        AuthModule,
         //==========CarModules=======//
+        AuthModule,
+        PaymentModule,
         UserModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
