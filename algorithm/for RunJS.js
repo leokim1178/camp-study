@@ -1,39 +1,16 @@
-
-
-function solution(s) {
-  let zero = 0
-  let result = 0
-	let string = s
-  
-  for(let k=0;k<5;k++){
-	let lng=string.split("").filter(x=>x!=0).length
-  zero += string.length-lng
-  let tr = ""
-  for(let i=0; lng/(2**i)>0;i++){
-    tr +=lng%2
-    lng = Math.floor(lng/2)
+function sort_02(arr, sortType) {
+  function HoF(a, b, sortType) {
+    if(a==b) return 0
+    return sortType ? a - b : b - a;
   }
-  s= tr.split('').reverse().join("")
-   result ++   
-   
-    if(s==0){break}
-  
+  console.log(HoF(1,0))
+  let answer = new Array(arr.length);
+  for (i = 0; i < arr.length; i++) {
+    for (j = 0; j < arr.length; j++) {
+      HoF(arr[i], arr[j]);
+    }
   }
-  
-  
-   console.log(result)
-  
 }
 
 
-
-
-
-
-
-
-
-
-solution("110010101001")
-// solution("01110")
-// solution("1111111")
+sort_02([10, 4, 55, 22, 1], true)

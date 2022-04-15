@@ -1,0 +1,15 @@
+{
+  "name": "algorithm-test-week1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "grin-quokka <grin-quokka@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "submit": "jest --reporters='<rootDir>/custom-reporter.js'"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "jest": "^27.3.1"
+  }
+}
