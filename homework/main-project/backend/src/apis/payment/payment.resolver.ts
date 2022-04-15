@@ -1,4 +1,8 @@
-import { UseGuards } from '@nestjs/common';
+import {
+    ConflictException,
+    UnprocessableEntityException,
+    UseGuards,
+} from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { GqlAuthAccessGuard } from 'src/commons/auth/gql-auth-guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-currentUser';
@@ -11,16 +15,36 @@ export class PaymentResolver {
 
     @UseGuards(GqlAuthAccessGuard)
     @Mutation(() => Payment)
-    createPayment(
+    async createPayment(
         @Args('impUid') impUid: string,
+        @Args('merchantUid') merchantUid: string,
         @Args('amount') amount: number,
         @CurrentUser() currentUser: ICurrentUser,
     ) {
-        console.log('11111@@@@@@@@', impUid);
-        return this.paymentService.create({
+        const accessToken = await this.paymentService.getImportToken();
+        const paymentData = await this.paymentService.getPaymentData({
+            accessToken,
             impUid,
-            amount,
-            currentUser,
         });
+        console.log(paymentData.status);
+        const registerd = await this.paymentService.findById({
+            merchantUid: paymentData.merchant_uid,
+        });
+        if (paymentData.status !== 'paid')
+            throw new UnprocessableEntityException(
+                '유효하지않은 아이디입니다 ',
+            );
+        console.log('1차 통과');
+        if (registerd)
+            throw new ConflictException('이미 등록된 결제정보입니다.');
+        console.log('2차 통과');
+
+        if (paymentData.amount == amount)
+            return await this.paymentService.create({
+                impUid,
+                amount,
+                currentUser,
+                merchantUid,
+            });
     }
 }
