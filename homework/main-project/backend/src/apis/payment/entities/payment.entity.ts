@@ -3,6 +3,7 @@ import { User } from 'src/apis/user/entities/user.entity';
 import {
     Column,
     CreateDateColumn,
+    DeleteDateColumn,
     Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
@@ -39,6 +40,19 @@ export class Payment {
     @Field(() => PAYMENT_STATUS_ENUM)
     status: string;
 
+    @Column({ nullable: true })
+    @Field(() => String, { nullable: true })
+    cancelReason: string;
+    @Column({ nullable: true })
+    @Field(() => String, { nullable: true })
+    refundHolder: string;
+    @Column({ nullable: true })
+    @Field(() => String, { nullable: true })
+    refundBank: string;
+    @Column({ nullable: true })
+    @Field(() => String, { nullable: true })
+    refundAccount: string;
+
     @ManyToOne(() => User)
     @Field(() => User)
     user: User;
@@ -46,4 +60,8 @@ export class Payment {
     @CreateDateColumn()
     @Field(() => Date)
     createdAt: Date;
+
+    @DeleteDateColumn({ nullable: true })
+    @Field(() => Date, { nullable: true })
+    deletedAt: Date;
 }

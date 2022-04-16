@@ -67,8 +67,13 @@ type Payment {
   merchantUid: String!
   amount: Int!
   status: PAYMENT_STATUS_ENUM!
+  cancelReason: String
+  refundHolder: String
+  refundBank: String
+  refundAccount: String
   user: User!
   createdAt: DateTime!
+  deletedAt: DateTime
 }
 
 enum PAYMENT_STATUS_ENUM {
@@ -97,6 +102,7 @@ type Mutation {
   login(email: String!, password: String!): String!
   restoreAccessToken: String!
   createPayment(impUid: String!, merchantUid: String!, amount: Float!): Payment!
+  cancelPayment(merchantUid: String!, cancelRequestAmount: Float!, cancelReason: String, refundHolder: String, refundBank: String, refundAccount: String): Payment!
   createUser(email: String!, password: String!, name: String!, age: String!): User!
   updateUser(updateUserInput: UpdateUserInput!, email: String!): User!
   deleteUser(email: String!): Boolean!
