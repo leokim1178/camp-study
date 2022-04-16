@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+
 import axios from 'axios';
+import { config } from 'dotenv';
+
+config();
 
 @Injectable()
 export class IamportService {
+    //
+    //Iamport에 등록된결제정보 조회
     async getPaymentData({ accessToken, impUid }) {
         const response = await axios({
             url: `https://api.iamport.kr/payments/${impUid}`, // imp_uid 전달
@@ -12,20 +18,21 @@ export class IamportService {
         return response.data.response;
     }
 
+    //Iamport api 사용을 위한 액세슨 토큰 발급요청
     async getIamportToken() {
         const response = await axios({
             url: 'https://api.iamport.kr/users/getToken',
             method: 'post', // POST method
             headers: { 'Content-Type': 'application/json' }, // "Content-Type": "application/json"
             data: {
-                imp_key: '5900300052556101', // REST API키
-                imp_secret:
-                    'eae5d03fcad302eb2cd494defc184f587ae07b329882d5912378d1581ff34769a7e963846b41dc8e', // REST API Secret
+                imp_key: process.env.IMP_KEY,
+                imp_secret: process.env.IMP_SECRET_KEY,
             },
         });
         return response.data.response.access_token;
     }
 
+    //결제 취소 api
     async cancelPay({
         accessToken,
         cancelReason,

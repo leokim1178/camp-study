@@ -49,7 +49,7 @@ export class AuthService {
         this.setRefreshToken({ user, res });
 
         res.redirect(
-            'http://localhost:5501/main-project/frontend/login/index.html',
+            'http://localhost:5500/homework/main-project/frontend/login/index.html',
         );
     }
 }

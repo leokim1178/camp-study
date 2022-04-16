@@ -13,6 +13,7 @@ export class PaymentService {
         private readonly userRepository: Repository<User>,
     ) {}
 
+    //결제정보 생성 및 저장
     async create({ impUid, amount, currentUser, merchantUid }) {
         //1. Payment ㅌㅔ이블에 거래기록 1줄 생성
 
@@ -38,12 +39,14 @@ export class PaymentService {
         return payment;
     }
 
+    //DB의 결제정보 조회
     async findById({ merchantUid }) {
         return await this.paymentRepository.findOne({
             where: { merchantUid: merchantUid },
         });
     }
 
+    //결제취소정보 생성 및 DB저장
     async createPaymentCancel({
         currentUser,
         amount,
@@ -51,7 +54,7 @@ export class PaymentService {
         cancelReason,
         impUid,
     }) {
-        //1. Payment ㅌㅔ이블에 거래기록 1줄 생성
+        //1. Payment 테이블에 취소기록 1줄 생성
 
         const result = this.paymentRepository.create({
             impUid: impUid,
@@ -73,7 +76,7 @@ export class PaymentService {
             { id: user.id },
             { point: user.point - amount },
         );
-
+        //4. 저장 결과 돌려주기
         return result;
     }
 }

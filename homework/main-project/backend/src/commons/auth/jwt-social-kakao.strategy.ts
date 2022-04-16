@@ -5,9 +5,11 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
     constructor() {
+        const kakaoClientID = process.env.KAKAO_CLIENT_ID;
+        const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
         super({
-            clientID: 'a9580d85ebc36dab0612fecf60ea7270',
-            clientSecret: 'Sz1JLIGy4nV9uNTFiUkmHOUOdG7fXnn4',
+            clientID: kakaoClientID,
+            clientSecret: kakaoClientSecret,
             callbackURL: 'http://localhost:3000/login/kakao',
             // scope: ['email', 'profile'],
         });
@@ -16,7 +18,6 @@ export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
     validate(accessToken: string, refreshToken: string, profile: any) {
         console.log('1/////', accessToken);
         console.log('2/////', refreshToken);
-        console.log('3/////', profile);
 
         return {
             email: profile._json.kakao_account.email,

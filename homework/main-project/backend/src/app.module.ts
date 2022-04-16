@@ -37,6 +37,8 @@ import { PaymentModule } from './apis/payment/payment.module';
             entities: [__dirname + '/apis/**/**/*.entity.*'],
             synchronize: true,
             logging: true,
+            retryAttempts: 30,
+            retryDelay: 5000,
         }),
     ],
 })

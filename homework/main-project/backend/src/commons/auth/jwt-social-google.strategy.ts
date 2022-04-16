@@ -1,22 +1,26 @@
 import { Strategy } from 'passport-google-oauth20';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
+import { config } from 'dotenv';
+
+config();
 
 @Injectable()
 export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
     constructor() {
+        const googleClientID = process.env.GOOGLE_CLIENT_ID;
+        const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
         super({
-            clientID:
-                '493861724816-2j12rfo3ljf0koumn0tk2ser9ts3qlm9.apps.googleusercontent.com',
-            clientSecret: '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',
+            clientID: googleClientID,
+            clientSecret: googleClientSecret,
             callbackURL: 'http://localhost:3000/login/google',
             scope: ['email', 'profile'],
         });
     }
 
     validate(accessToken: string, refreshToken: string, profile: any) {
-        console.log(accessToken);
-        console.log(refreshToken);
+        console.log('1//////', accessToken);
+        console.log('2//////', refreshToken);
 
         return {
             email: profile.emails[0].value,

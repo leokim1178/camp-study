@@ -5,9 +5,11 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
     constructor() {
+        const naverClientID = process.env.NAVER_CLIENT_ID;
+        const naverClientSecret = process.env.NAVER_CLIENT_SECRET;
         super({
-            clientID: 'L73gLRlKOELoHqgF8J0V',
-            clientSecret: 'Y_RIkOCU8s',
+            clientID: naverClientID,
+            clientSecret: naverClientSecret,
             callbackURL: 'http://localhost:3000/login/naver',
             // scope: ['email', 'profile'],
         });
@@ -16,7 +18,6 @@ export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
     validate(accessToken: string, refreshToken: string, profile: any) {
         console.log('1/////', accessToken);
         console.log('2/////', refreshToken);
-        console.log('3/////', profile);
 
         return {
             email: profile.emails[0].value,

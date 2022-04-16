@@ -112,7 +112,7 @@ export class PaymentResolver {
             cancelReason: cancelData.cancel_reason,
             impUid: cancelData.imp_uid,
         });
-        console.log(updatedPayment);
+
         return updatedPayment;
     }
 }
