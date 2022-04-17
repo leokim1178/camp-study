@@ -86,19 +86,26 @@
 */
 
 function battleship(field) {
+  const ships = field.flat().reduce((acc, cur) => {
+    return acc + cur;
+  });
+  if (ships !== 4 + 3 * 2 + 2 * 3 + 1 * 4) return false;
+
   const fl = field.length;
-  let location = [];
-  for (let i = 0; i < fl; i++) {
-    for (let j = 0; j < fl; j++) {
-      if (field[i][j]) {
-        location.push([i, j]);
-      }
+  for (let i = 1; i < fl; i++) {
+    for (let j = 1; j < fl; j++) {
+      if (
+        field[i][j] == 1 &&
+        (field[i + 1][j + 1] === 1 ||
+          field[i - 1][j - 1] === 1 ||
+          field[i + 1][j - 1] === 1 ||
+          field[i - 1][j + 1] === 1)
+      )
+        return false;
     }
   }
-  console.log(location);
 
-  let arr = [];
-  for (let k = 0; k < location.length; k++) {}
+  return true;
 }
 
 module.exports = battleship;

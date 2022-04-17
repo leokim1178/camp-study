@@ -50,7 +50,6 @@ function stringPattern(pattern, str) {
   }
 
   let map = new Map(formap);
-  console.log(map);
 
   for (let i = 0; i < newPat.length; i++) {
     if (map.get(newPat[i]) !== newStr[i]) {
