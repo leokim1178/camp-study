@@ -10,14 +10,13 @@ import { UserModule } from './apis/user/user.module';
 import { AuthModule } from './apis/auth/auth.module';
 import { PaymentModule } from './apis/payment/payment.module';
 import { CarMyCarModule } from './apis/car/carMyCar/carMyCar.module';
-import { CarWheelModule } from './apis/car/carWheel/carWheel.module';
 
 @Module({
     imports: [
         CarModelModule,
         CarMyCarModule,
         CarTypeModule,
-        CarWheelModule,
+
         //==========CarModules=======//
         AuthModule,
         PaymentModule,

@@ -82,8 +82,6 @@ type Query {
   fetchCarModel(carModelId: String!): CarModel!
   fetchCarMyCars: [CarMyCar!]!
   fetchCarMyCar(carMyCarId: String!): CarMyCar!
-  fetchCarWheels: [CarWheel!]!
-  fetchCarWheel(carWheelId: String!): CarWheel!
   fetch: String!
   fetchUsers: [User!]!
   fetchUser(email: String!): User!
@@ -99,8 +97,6 @@ type Mutation {
   deleteCarMyCar(carMyCarId: String!): Boolean!
   restoreCarMyCar(carMyCarId: String!): Boolean!
   createCarType(type: String!): CarType!
-  createCarWheel(createCarWheelInput: CreateCarWheelInput!): CarWheel!
-  updateCarWheel(wheelId: String!, updateCarWheelInput: UpdateCarWheelInput!): CarWheel!
   login(email: String!, password: String!): String!
   restoreAccessToken: String!
   createPayment(impUid: String!, merchantUid: String!, amount: Float!): Payment!
@@ -137,30 +133,22 @@ input CreateMyCarInput {
   color: String!
   interior: String!
   isAuto: Boolean!
-  carWheelId: String!
   carModelId: String!
+  createCarWheelInput: CreateCarWheelInput!
+}
+
+input CreateCarWheelInput {
+  wheelName: String!
+  wheelSize: Int!
+  wheelPrice: Int!
 }
 
 input UpdateMyCarInput {
   color: String
   interior: String
   isAuto: Boolean
-  carWheelId: String
   carModelId: String
-}
-
-input CreateCarWheelInput {
-  wheelId: String!
-  wheelName: String!
-  wheelSize: Int!
-  wheelPrice: Int!
-}
-
-input UpdateCarWheelInput {
-  wheelId: String
-  wheelName: String
-  wheelSize: Int
-  wheelPrice: Int
+  createCarWheelInput: CreateCarWheelInput
 }
 
 input UpdateUserInput {

@@ -37,24 +37,15 @@ export class CarMyCarService {
     }
 
     async create({ createMyCarInput }) {
-        const {
-            carWheelId, //
-            carMyCarId,
-            ...detail
-        } = createMyCarInput;
+        const { createCarWheelInput, carModelId, ...detail } = createMyCarInput;
 
-        const wheelResult = await this.carWheelRepository.findOne({
-            where: {
-                wheelId: carWheelId,
-            },
+        const wheelResult = await this.carWheelRepository.save({
+            ...createCarWheelInput,
         });
-
-        if (!wheelResult)
-            throw new UnprocessableEntityException('잘못된 휠 정보입니다');
 
         const modelResult = await this.carModelRepository.findOne({
             where: {
-                id: carMyCarId,
+                id: carModelId,
             },
         });
         if (!modelResult)
@@ -62,8 +53,8 @@ export class CarMyCarService {
 
         return await this.carMyCarRepository.save({
             ...detail,
-            carWheel: wheelResult,
             carModel: modelResult,
+            carWheel: wheelResult,
         });
     }
 

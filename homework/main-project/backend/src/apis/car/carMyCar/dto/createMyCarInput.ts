@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { CreateCarWheelInput } from '../../carWheel/dto/createCarWheelInput';
 
 @InputType()
 export class CreateMyCarInput {
@@ -10,8 +11,8 @@ export class CreateMyCarInput {
     isAuto: boolean;
 
     @Field(() => String)
-    carWheelId: string;
-
-    @Field(() => String)
     carModelId: string;
+
+    @Field(() => CreateCarWheelInput)
+    createCarWheelInput: CreateCarWheelInput;
 }
