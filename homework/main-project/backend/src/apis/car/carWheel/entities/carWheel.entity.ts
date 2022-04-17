@@ -1,19 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
 export class CarWheel {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn()
     @Field(() => String)
-    id: string;
+    wheelId: string;
     @Column()
     @Field(() => String)
-    name: string;
+    wheelName: string;
     @Column()
     @Field(() => Int)
-    size: number;
+    wheelSize: number;
     @Column()
-    @Field(() => Number)
-    price: number;
+    @Field(() => Int)
+    wheelPrice: number;
 }

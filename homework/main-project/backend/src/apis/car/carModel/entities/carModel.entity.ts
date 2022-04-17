@@ -47,6 +47,7 @@ export class CarModel {
     deletedAt: Date;
 
     @ManyToOne(() => CarType)
+    @Field(() => CarType)
     carType: CarType;
 
     @JoinTable()

@@ -6,9 +6,6 @@ import { CarWheel } from './entities/carWheel.entity';
 
 @Module({
     imports: [TypeOrmModule.forFeature([CarWheel])],
-    providers: [
-        CarWheelResolver, //
-        CarWheelService,
-    ],
+    providers: [CarWheelResolver, CarWheelService],
 })
 export class CarWheelModule {}

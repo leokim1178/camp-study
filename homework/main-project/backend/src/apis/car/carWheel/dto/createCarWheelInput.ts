@@ -1,9 +1,16 @@
-import { InputType, OmitType } from '@nestjs/graphql';
-import { CarWheel } from '../entities/carWheel.entity';
+import { Field, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
-export class CreateCarWheelInput extends OmitType(
-    CarWheel,
-    ['id'],
-    InputType,
-) {}
+export class CreateCarWheelInput {
+    @Field(() => String)
+    wheelId: string;
+
+    @Field(() => String)
+    wheelName: string;
+
+    @Field(() => Int)
+    wheelSize: number;
+
+    @Field(() => Int)
+    wheelPrice: number;
+}

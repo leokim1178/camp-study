@@ -5,19 +5,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CarModelModule } from './apis/car/carModel/carModel.module';
 import { CarTypeModule } from './apis/car/carType/carType.module';
-import { CarModelDetailModule } from './apis/car/carModelDetail/carModelDetail.module';
 
-import { CarWheelModule } from './apis/car/carWheel/carWheel.module';
 import { UserModule } from './apis/user/user.module';
 import { AuthModule } from './apis/auth/auth.module';
 import { PaymentModule } from './apis/payment/payment.module';
+import { CarMyCarModule } from './apis/car/carMyCar/carMyCar.module';
+import { CarWheelModule } from './apis/car/carWheel/carWheel.module';
 
 @Module({
     imports: [
         CarModelModule,
-        CarModelDetailModule,
-        CarWheelModule,
+        CarMyCarModule,
         CarTypeModule,
+        CarWheelModule,
         //==========CarModules=======//
         AuthModule,
         PaymentModule,
