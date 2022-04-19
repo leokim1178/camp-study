@@ -28,7 +28,7 @@ export class FileService {
                     el.createReadStream()
                         .pipe(storage.file(el.filename).createWriteStream())
                         .on('finish', () =>
-                            resolve(`codecamp-file-storage/${el.filename}`),
+                            resolve(`example____1/${el.filename}`),
                         )
                         .on('error', () => reject());
                 });

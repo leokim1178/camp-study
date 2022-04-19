@@ -77,6 +77,12 @@ type CarMyCar {
   carModel: CarModel!
 }
 
+type CarImg {
+  id: String!
+  imgURL: String!
+  myCar: CarMyCar!
+}
+
 type Query {
   fetchCarModels: [CarModel!]!
   fetchCarModel(carModelId: String!): CarModel!
@@ -97,6 +103,9 @@ type Mutation {
   deleteCarMyCar(carMyCarId: String!): Boolean!
   restoreCarMyCar(carMyCarId: String!): Boolean!
   createCarType(type: String!): CarType!
+  uploadImg(imgs: [Upload!]!): [String!]!
+  createImg(myCarId: String!, imgURL: String!): CarImg!
+  updateImg(myCarId: String!, imgURL: String!): CarImg!
   login(email: String!, password: String!): String!
   restoreAccessToken: String!
   createPayment(impUid: String!, merchantUid: String!, amount: Float!): Payment!
@@ -150,6 +159,9 @@ input UpdateMyCarInput {
   carModelId: String
   createCarWheelInput: CreateCarWheelInput
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 input UpdateUserInput {
   email: String
