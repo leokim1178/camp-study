@@ -8,6 +8,7 @@ import { AuthModule } from './apis/auth/auth.module';
 
 import { BoardModule } from './apis/boards/boards.module';
 import { FileModule } from './apis/file/file.module';
+
 import { PointTransactionModule } from './apis/pointTransaction/pointTransaction.module';
 import { ProductModule } from './apis/product/product.module';
 import { ProductCategoryModule } from './apis/productCategory/productCategory.module';
