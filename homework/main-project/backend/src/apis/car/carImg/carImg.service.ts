@@ -25,9 +25,9 @@ export class CarImgService {
 
     async upload({ imgs }: ICarImg) {
         const storage = new Storage({
-            keyFilename: 'car-imgs-253dcdc26486.json',
-            projectId: 'car-imgs',
-        }).bucket('leo_car_images');
+            keyFilename: process.env.STORAGE_KEY_FILENAME,
+            projectId: process.env.STORAGE_PROJECT_ID,
+        }).bucket(process.env.STORAGE_BUCKET);
 
         const waitedImgs = await Promise.all(imgs);
 
@@ -37,13 +37,14 @@ export class CarImgService {
                     el.createReadStream()
                         .pipe(storage.file(el.filename).createWriteStream())
                         .on('finish', () =>
-                            resolve(`leo_car_images/${el.filename}`),
+                            resolve(
+                                `${process.env.STORAGE_BUCKET}/${el.filename}`,
+                            ),
                         )
                         .on('error', () => reject());
                 });
             }),
         );
-        console.log(results);
 
         return results;
     }
@@ -70,7 +71,7 @@ export class CarImgService {
         const Imgs = await this.carImgRepository.find({
             where: { myCar: myCarId },
         });
-        console.log(Imgs);
+
         const Img = Imgs.filter((x) => {
             return x.imgURL === imgURL;
         });

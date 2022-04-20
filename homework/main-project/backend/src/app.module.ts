@@ -11,6 +11,7 @@ import { AuthModule } from './apis/auth/auth.module';
 import { PaymentModule } from './apis/payment/payment.module';
 import { CarMyCarModule } from './apis/car/carMyCar/carMyCar.module';
 import { CarImgModule } from './apis/car/carImg/carImg.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [
@@ -27,6 +28,7 @@ import { CarImgModule } from './apis/car/carImg/carImg.module';
             autoSchemaFile: 'src/commons/graphql/schema.gql',
             context: ({ req, res }) => ({ req, res }),
         }),
+        ConfigModule.forRoot({ isGlobal: true }),
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: 'my-database',
