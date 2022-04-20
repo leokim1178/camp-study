@@ -15,23 +15,23 @@ export class CarImgResolver {
         return this.carImgService.upload({ imgs });
     }
 
-    @Mutation(() => CarImg)
+    @Mutation(() => [CarImg])
     createImg(
         @Args('myCarId')
         myCarId: string,
-        @Args('imgURL')
-        imgURL: string,
+        @Args({ name: 'imgURLs', type: () => [String] })
+        imgURLs: string[],
     ) {
-        return this.carImgService.saveImg({ myCarId, imgURL });
+        return this.carImgService.create({ myCarId, imgURLs });
     }
 
-    @Mutation(() => CarImg)
+    @Mutation(() => [CarImg])
     updateImg(
         @Args('myCarId')
         myCarId: string,
-        @Args('imgURL')
-        imgURL: string,
+        @Args({ name: 'imgURLs', type: () => [String] })
+        imgURLs: string[],
     ) {
-        return this.carImgService.updateImg({ myCarId, imgURL });
+        return this.carImgService.updateImg({ myCarId, imgURLs });
     }
 }

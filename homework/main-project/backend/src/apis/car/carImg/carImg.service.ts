@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FileUpload } from 'graphql-upload';
+import { async } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CarMyCar } from '../carMyCar/entities/carMyCar.entity';
 import { CarImg } from './entities/carImg.entity';
@@ -49,18 +50,18 @@ export class CarImgService {
         return results;
     }
 
-    async saveImg({ myCarId, imgURL }) {
-        const Img = await this.carImgRepository.findOne({
-            myCar: myCarId,
-            imgURL,
-        });
-        if (Img) throw new ConflictException('이미 등록된 이미지입니다');
+    async create({ myCarId, imgURLs }) {
         const myCar = await this.carMyCarRepository.findOne({
             where: { id: myCarId },
         });
-        return await this.carImgRepository.save({ imgURL, myCar });
+
+        const result = await imgURLs.map(async (el) => {
+            return await this.carImgRepository.save({ imgURL: el, myCar });
+        });
+
+        return result;
     }
-    async updateImg({ myCarId, imgURL }) {
+    async updateImg({ myCarId, imgURLs }) {
         const myCar = await this.carMyCarRepository.findOne({
             where: { id: myCarId },
         });
@@ -68,19 +69,26 @@ export class CarImgService {
             throw new UnprocessableEntityException(
                 '등록되지 않은 차정보입니다',
             );
-        const Imgs = await this.carImgRepository.find({
-            where: { myCar: myCarId },
-        });
 
-        const Img = Imgs.filter((x) => {
-            return x.imgURL === imgURL;
-        });
-        if (Img.length) return Img[0];
-        else {
-            const myCar = await this.carMyCarRepository.findOne({
-                where: { id: myCarId },
+        const imgResult = [];
+        for (let i = 0; i < imgURLs.length; i++) {
+            const prevImg = await this.carImgRepository.findOne({
+                where: {
+                    myCar,
+                    imgURL: imgURLs[i],
+                },
             });
-            return await this.carImgRepository.save({ imgURL, myCar });
+            if (prevImg) {
+                imgResult.push(prevImg);
+            } else {
+                const newtag = await this.carImgRepository.save({
+                    imgURL: imgURLs[i],
+                    myCar,
+                });
+                imgResult.push(newtag);
+            }
         }
+
+        return imgResult;
     }
 }
