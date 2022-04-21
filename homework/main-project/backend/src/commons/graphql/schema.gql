@@ -107,6 +107,7 @@ type Mutation {
   createImg(myCarId: String!, imgURLs: [String!]!): [CarImg!]!
   updateImg(myCarId: String!, imgURLs: [String!]!): [CarImg!]!
   login(email: String!, password: String!): String!
+  logout: String!
   restoreAccessToken: String!
   createPayment(impUid: String!, merchantUid: String!, amount: Float!): Payment!
   cancelPayment(merchantUid: String!, cancelRequestAmount: Float!, cancelReason: String, refundHolder: String, refundBank: String, refundAccount: String): Payment!

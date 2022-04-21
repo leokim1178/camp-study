@@ -5,6 +5,8 @@
 .DS_Store
 yarn.lock
 main-project-leo1178-4adca62064e5.json
+gcp-bigquery.json
+gcp-storage.json
 
 # Logs
 logs

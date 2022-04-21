@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import {
+    GqlAuthAccessGuard,
+    GqlAuthRefreshGuard,
+} from 'src/commons/auth/gql-auth-guard';
 import { JwtRefreshStrategy } from 'src/commons/auth/jwt-refresh-strategy';
 import { JwtGoogleStrategy } from 'src/commons/auth/jwt-social-google.strategy';
 import { JwtKakaoStrategy } from 'src/commons/auth/jwt-social-kakao.strategy';
@@ -24,6 +28,8 @@ import { AuthService } from './auth.service';
         JwtGoogleStrategy,
         JwtNaverStrategy,
         JwtKakaoStrategy,
+        GqlAuthAccessGuard,
+        GqlAuthRefreshGuard,
     ],
     controllers: [AuthController],
 })

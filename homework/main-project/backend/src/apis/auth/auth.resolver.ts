@@ -1,16 +1,26 @@
-import { UnprocessableEntityException, UseGuards } from '@nestjs/common';
+import {
+    CACHE_MANAGER,
+    Inject,
+    UnauthorizedException,
+    UnprocessableEntityException,
+    UseGuards,
+} from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { GqlAuthRefreshGuard } from 'src/commons/auth/gql-auth-guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-currentUser';
+import * as jwt from 'jsonwebtoken';
+import { Cache } from 'cache-manager';
 
 @Resolver()
 export class AuthResolver {
     constructor(
         private readonly authService: AuthService, //
         private readonly userService: UserService,
+        @Inject(CACHE_MANAGER)
+        private readonly cacheManager: Cache,
     ) {}
 
     @Mutation(() => String)
@@ -42,12 +52,51 @@ export class AuthResolver {
         return this.authService.getAccessToken({ user });
     }
 
+    // @UseGuards(GqlAuthRefreshGuard)
+    @Mutation(() => String)
+    async logout(
+        @Context()
+        context: any,
+    ) {
+        try {
+            const access = context.req.headers.authorization;
+            const cookie = context.req.headers.cookie;
+
+            const accessToken = access.split(' ')[1];
+            const refreshToken = cookie.replace('refreshToken=', '');
+            console.log(accessToken);
+            console.log(refreshToken);
+
+            const accessResult = jwt.verify(accessToken, 'accessKey');
+            const refreshResult = jwt.verify(refreshToken, 'refreshKey');
+
+            const accexp = Object.values(accessResult)[3];
+
+            const refexp = Object.values(refreshResult)[3];
+
+            await this.cacheManager.set(
+                `accessToken:${accessToken}`,
+                'accessToken',
+                { ttl: accexp },
+            );
+            await this.cacheManager.set(
+                `refreshToken:${refreshToken}`,
+                'refreshToken',
+                { ttl: refexp },
+            );
+            return '로그아웃에 성공했습니다';
+        } catch (error) {
+            throw new UnauthorizedException('토큰 검증 실패');
+        }
+    }
+
     @UseGuards(GqlAuthRefreshGuard)
     @Mutation(() => String)
     restoreAccessToken(
         @CurrentUser()
         currentUser: ICurrentUser,
     ) {
+        console.log(currentUser);
         return this.authService.getAccessToken({ user: currentUser });
     }
 }
