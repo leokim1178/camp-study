@@ -52,16 +52,17 @@ export class AuthResolver {
         return this.authService.getAccessToken({ user });
     }
 
-    // @UseGuards(GqlAuthRefreshGuard)
+
     @Mutation(() => String)
     async logout(
         @Context()
         context: any,
+
     ) {
         try {
             const access = context.req.headers.authorization;
             const cookie = context.req.headers.cookie;
-
+            
             const accessToken = access.split(' ')[1];
             const refreshToken = cookie.replace('refreshToken=', '');
             console.log(accessToken);

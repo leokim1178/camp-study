@@ -50,15 +50,18 @@
 */
 
 function directionOfDominoes(dominoes) {
-  d = dominoes.split("");
-  for (i = 1; i <= d.length; i++) {
-    if (d[i - 1] == "L") {
-      d[i - 2] = "L";
-    } else if (d[i - 1] == "R") {
-      d[i] = "";
-    }
+  let foreces = Array(dominoes.length).fill(0);
+  console.log(foreces);
+  let force =0
+
+  //R의 영향을 받는 요소 확인
+  for(let i=0; i<dominoes.length; i++){
+    if(dominoes[i]=='R') force=dominoes.length
+    else if(dominoes[i]=="L") force =0;
+    else force = Math.
+
   }
-  console.log(d.join(""));
+
 }
 
 directionOfDominoes(".L.R...LR..L..");
