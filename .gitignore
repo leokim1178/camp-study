@@ -38,6 +38,3 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-class/05-04-graphql-api-with-apollo-server-phone/.DS_Store
-class/05-01-rest-api-with-frontend/backend/.DS_Store
-homework/mini-project/webcrawler/.DS_Store
