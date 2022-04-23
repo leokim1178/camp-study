@@ -29,16 +29,16 @@ services:
             - 9200:9200
 
 # mysql에 접속해서 polling 해서 elasticsearch에 넣어주는
-    # logstash:
-    #     image: logstash:7.17.0  
-    #     volumes:
-    #         - ./elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-    #         - ./elk/logstash/mysql-connector-java-8.0.28.jar:/usr/share/logstash/mysql-connector-java-8.0.28.jar
+    logstash:
+        image: logstash:7.17.0  
+        # volumes:
+        #     - ./elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+        #     - ./elk/logstash/mysql-connector-java-8.0.28.jar:/usr/share/logstash/mysql-connector-java-8.0.28.jar
 
-    # kibana:  
-    #     image: kibana:7.17.0
-    #     environment:
-    #         ELASTICSEARCH_UTL: http://elasticsearch:9200
-    #         ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-    #     ports:
-    #         - 5601:5601
+    kibana:  
+        image: kibana:7.17.0
+        environment:
+            ELASTICSEARCH_UTL: http://elasticsearch:9200
+            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+        ports:
+            - 5601:5601
