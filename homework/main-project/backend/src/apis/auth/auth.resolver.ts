@@ -1,5 +1,6 @@
 import {
     CACHE_MANAGER,
+    ConflictException,
     Inject,
     UnauthorizedException,
     UnprocessableEntityException,
@@ -9,7 +10,10 @@ import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
-import { GqlAuthRefreshGuard } from 'src/commons/auth/gql-auth-guard';
+import {
+    GqlAuthAccessGuard,
+    GqlAuthRefreshGuard,
+} from 'src/commons/auth/gql-auth-guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-currentUser';
 import * as jwt from 'jsonwebtoken';
 import { Cache } from 'cache-manager';
@@ -52,29 +56,37 @@ export class AuthResolver {
         return this.authService.getAccessToken({ user });
     }
 
-
     @Mutation(() => String)
     async logout(
         @Context()
         context: any,
-
     ) {
-        try {
-            const access = context.req.headers.authorization;
-            const cookie = context.req.headers.cookie;
-            
-            const accessToken = access.split(' ')[1];
-            const refreshToken = cookie.replace('refreshToken=', '');
-            console.log(accessToken);
-            console.log(refreshToken);
+        //1. 토큰 추출
+        const access = context.req.headers.authorization;
+        const cookie = context.req.headers.cookie;
 
+        const accessToken = access.split(' ')[1];
+        const refreshToken = cookie.replace('refreshToken=', '');
+        try {
+            //2-1. 토큰 검증
             const accessResult = jwt.verify(accessToken, 'accessKey');
             const refreshResult = jwt.verify(refreshToken, 'refreshKey');
-
+            //2-2. 토큰 만료일 확인
             const accexp = Object.values(accessResult)[3];
-
             const refexp = Object.values(refreshResult)[3];
 
+            //3. 이미 로그아웃된 유저인지 확인
+            const searchAccess = await this.cacheManager.get(
+                `accessToken:${accessToken}`,
+            );
+            const searchRefresh = await this.cacheManager.get(
+                `refreshToken:${refreshToken}`,
+            );
+
+            if (searchRefresh || searchAccess)
+                throw new ConflictException('이미 로그아웃된 유저입니다');
+
+            //4. redis에 log-out blacklist 저장
             await this.cacheManager.set(
                 `accessToken:${accessToken}`,
                 'accessToken',
@@ -85,8 +97,15 @@ export class AuthResolver {
                 'refreshToken',
                 { ttl: refexp },
             );
+            //5. 완료 메세지 전송
             return '로그아웃에 성공했습니다';
         } catch (error) {
+            if (error.status == 409)
+                throw new UnauthorizedException(error.response);
+
+            // 검증 오류(토큰 만료)시 redis의 blacklist에서 삭제
+            await this.cacheManager.del(`accessToken:${accessToken}`);
+            await this.cacheManager.del(`refreshToken:${refreshToken}`);
             throw new UnauthorizedException('토큰 검증 실패');
         }
     }
