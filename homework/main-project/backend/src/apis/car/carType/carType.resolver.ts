@@ -8,8 +8,10 @@ export class CarTypeResolver {
 
     @Mutation(() => CarType)
     async createCarType(
-        @Args('type') type: string, //
+        @Args('id') id: string,
+        @Args('type') type: string,
+        @Args('description') description: string,
     ) {
-        return await this.carTypeService.create({ type });
+        return await this.carTypeService.create({ id, type, description });
     }
 }

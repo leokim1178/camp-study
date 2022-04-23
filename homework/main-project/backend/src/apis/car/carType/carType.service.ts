@@ -10,8 +10,12 @@ export class CarTypeService {
         private readonly carTypeRepository: Repository<CarType>,
     ) {}
 
-    async create({ type }) {
-        const result = await this.carTypeRepository.save({ type }); //카테고리를 데이터베이스에 저장
+    async create({ id, type, description }) {
+        const result = await this.carTypeRepository.save({
+            id,
+            type,
+            description,
+        }); //카테고리를 데이터베이스에 저장
         console.log(result);
         return result;
     }

@@ -16,7 +16,7 @@ export class CarImgResolver {
     }
 
     @Mutation(() => [CarImg])
-    createImg(
+    createCarImgs(
         @Args('myCarId')
         myCarId: string,
         @Args({ name: 'imgURLs', type: () => [String] })
@@ -26,7 +26,7 @@ export class CarImgResolver {
     }
 
     @Mutation(() => [CarImg])
-    updateImg(
+    updateCarImgs(
         @Args('myCarId')
         myCarId: string,
         @Args({ name: 'imgURLs', type: () => [String] })

@@ -5,6 +5,7 @@
 type CarType {
   id: String!
   type: String!
+  description: String!
 }
 
 type CarTag {
@@ -102,10 +103,10 @@ type Mutation {
   updateCarMyCar(carMyCarId: String!, updateMyCarInput: UpdateMyCarInput!): CarMyCar!
   deleteCarMyCar(carMyCarId: String!): Boolean!
   restoreCarMyCar(carMyCarId: String!): Boolean!
-  createCarType(type: String!): CarType!
+  createCarType(id: String!, type: String!, description: String!): CarType!
   uploadImg(imgs: [Upload!]!): [String!]!
-  createImg(myCarId: String!, imgURLs: [String!]!): [CarImg!]!
-  updateImg(myCarId: String!, imgURLs: [String!]!): [CarImg!]!
+  createCarImgs(myCarId: String!, imgURLs: [String!]!): [CarImg!]!
+  updateCarImgs(myCarId: String!, imgURLs: [String!]!): [CarImg!]!
   login(email: String!, password: String!): String!
   logout: String!
   restoreAccessToken: String!
