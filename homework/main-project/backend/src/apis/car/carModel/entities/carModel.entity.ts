@@ -7,14 +7,15 @@ import {
     JoinTable,
     ManyToMany,
     ManyToOne,
-    PrimaryGeneratedColumn,
+    PrimaryColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 import { CarTag } from '../../carTag/entities/carTag.entity';
 
 @Entity()
 @ObjectType()
 export class CarModel {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn()
     @Field(() => String)
     id: string;
 
@@ -45,6 +46,9 @@ export class CarModel {
     @DeleteDateColumn({ nullable: true }) //
     @Field(() => Date)
     deletedAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 
     @ManyToOne(() => CarType)
     @Field(() => CarType)

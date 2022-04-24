@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { CarCustom } from 'src/apis/car/carCustom/entities/carCustom.entity';
 import { User } from 'src/apis/user/entities/user.entity';
 import {
     Column,
@@ -36,6 +37,14 @@ export class Payment {
     @Field(() => Int)
     amount: number;
 
+    @ManyToOne(() => CarCustom)
+    @Field(() => CarCustom)
+    carCustom: CarCustom;
+
+    @ManyToOne(() => User)
+    @Field(() => User)
+    user: User;
+
     @Column({ type: 'enum', enum: PAYMENT_STATUS_ENUM }) //하드코딩된 건 대문자로 쓰는게 관례
     @Field(() => PAYMENT_STATUS_ENUM)
     status: string;
@@ -43,19 +52,6 @@ export class Payment {
     @Column({ nullable: true })
     @Field(() => String, { nullable: true })
     cancelReason: string;
-    @Column({ nullable: true })
-    @Field(() => String, { nullable: true })
-    refundHolder: string;
-    @Column({ nullable: true })
-    @Field(() => String, { nullable: true })
-    refundBank: string;
-    @Column({ nullable: true })
-    @Field(() => String, { nullable: true })
-    refundAccount: string;
-
-    @ManyToOne(() => User)
-    @Field(() => User)
-    user: User;
 
     @CreateDateColumn()
     @Field(() => Date)

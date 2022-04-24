@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { CreateCarWheelInput } from '../../carWheel/dto/createCarWheelInput';
 
 @InputType()
-export class CreateMyCarInput {
+export class CreateCarCustomInput {
     @Field(() => String)
     color: string;
     @Field(() => String)

@@ -7,6 +7,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { GqlAuthAccessGuard } from 'src/commons/auth/gql-auth-guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-currentUser';
 import { IamportService } from '../iamport/iamport.service';
+
 import { Payment } from './entities/payment.entity';
 import { PaymentService } from './payment.service';
 
@@ -23,6 +24,7 @@ export class PaymentResolver {
         @Args('impUid') impUid: string,
         @Args('merchantUid') merchantUid: string,
         @Args('amount') amount: number,
+        @Args('carCustomId') carCustomId: string,
         @CurrentUser() currentUser: ICurrentUser,
     ) {
         const accessToken = await this.iamportService.getIamportToken();
@@ -43,13 +45,15 @@ export class PaymentResolver {
             throw new ConflictException('이미 등록된 결제정보입니다.');
         console.log('2차 통과');
 
-        if (paymentData.amount == amount)
+        if (paymentData.amount == amount) {
             return await this.paymentService.create({
                 impUid,
                 amount,
                 currentUser,
                 merchantUid,
+                carCustomId,
             });
+        }
     }
 
     @UseGuards(GqlAuthAccessGuard)
@@ -63,12 +67,6 @@ export class PaymentResolver {
         cancelRequestAmount: number,
         @Args('cancelReason', { nullable: true })
         cancelReason: string,
-        @Args('refundHolder', { nullable: true })
-        refundHolder: string,
-        @Args('refundBank', { nullable: true })
-        refundBank: string,
-        @Args('refundAccount', { nullable: true })
-        refundAccount: string,
     ) {
         const accessToken = await this.iamportService.getIamportToken();
         const userPayment = await this.paymentService.findById({ merchantUid });

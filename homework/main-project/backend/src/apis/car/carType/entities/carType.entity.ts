@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -13,4 +13,6 @@ export class CarType {
     @Column({ type: 'varchar' })
     @Field(() => String)
     description: string;
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

@@ -4,13 +4,13 @@ import { Repository } from 'typeorm';
 
 import { CarModel } from '../carModel/entities/carModel.entity';
 import { CarWheel } from '../carWheel/entities/carWheel.entity';
-import { CarMyCar } from './entities/carMyCar.entity';
+import { CarCustom } from './entities/carCustom.entity';
 
 @Injectable()
-export class CarMyCarService {
+export class CarCustomService {
     constructor(
-        @InjectRepository(CarMyCar)
-        private readonly carMyCarRepository: Repository<CarMyCar>,
+        @InjectRepository(CarCustom)
+        private readonly carCustomRepository: Repository<CarCustom>,
         @InjectRepository(CarWheel)
         private readonly carWheelRepository: Repository<CarWheel>,
 
@@ -18,7 +18,7 @@ export class CarMyCarService {
         private readonly carModelRepository: Repository<CarModel>,
     ) {}
     async findAll() {
-        const result = await this.carMyCarRepository.find({
+        const result = await this.carCustomRepository.find({
             relations: ['carModel', 'carWheel'],
             withDeleted: true,
         });
@@ -26,9 +26,9 @@ export class CarMyCarService {
         return result;
     }
 
-    async findOne({ carMyCarId }) {
-        const result = await this.carMyCarRepository.findOne({
-            where: { id: carMyCarId },
+    async findOne({ carCustomId }) {
+        const result = await this.carCustomRepository.findOne({
+            where: { id: carCustomId },
             relations: ['carModel', 'carWheel'],
             withDeleted: true,
         });
@@ -36,8 +36,9 @@ export class CarMyCarService {
         return result;
     }
 
-    async create({ createMyCarInput }) {
-        const { createCarWheelInput, carModelId, ...detail } = createMyCarInput;
+    async create({ createCarCustomInput }) {
+        const { createCarWheelInput, carModelId, ...detail } =
+            createCarCustomInput;
 
         const wheelResult = await this.carWheelRepository.save({
             ...createCarWheelInput,
@@ -51,36 +52,36 @@ export class CarMyCarService {
         if (!modelResult)
             throw new UnprocessableEntityException('잘못된 모델정보입니다');
 
-        return await this.carMyCarRepository.save({
+        return await this.carCustomRepository.save({
             ...detail,
             carModel: modelResult,
             carWheel: wheelResult,
         });
     }
 
-    async update({ carMyCarId, updateMyCarInput }) {
-        const MyCar = await this.carMyCarRepository.findOne({
+    async update({ carCustomId, updateCarCustomInput }) {
+        const carCustom = await this.carCustomRepository.findOne({
             where: {
-                id: carMyCarId,
+                id: carCustomId,
             },
         });
-        const newMyCar = {
-            ...MyCar,
-            ...updateMyCarInput,
+        const newCarCustom = {
+            ...carCustom,
+            ...updateCarCustomInput,
         };
-        return await this.carMyCarRepository.save(newMyCar);
+        return await this.carCustomRepository.save(newCarCustom);
     }
 
-    async delete({ carMyCarId }) {
-        const result = await this.carMyCarRepository.softDelete({
-            id: carMyCarId,
+    async delete({ carCustomId }) {
+        const result = await this.carCustomRepository.softDelete({
+            id: carCustomId,
         }); // 다양한 조건으로 삭제가능!!
         return result.affected ? true : false;
     }
 
-    async restore({ carMyCarId }) {
-        const result = await this.carMyCarRepository.restore({
-            id: carMyCarId,
+    async restore({ carCustomId }) {
+        const result = await this.carCustomRepository.restore({
+            id: carCustomId,
         });
         return result.affected ? true : false;
     }

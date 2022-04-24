@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Connection, Repository } from 'typeorm';
+import { CarCustom } from '../car/carCustom/entities/carCustom.entity';
 import { User } from '../user/entities/user.entity';
 import { Payment, PAYMENT_STATUS_ENUM } from './entities/payment.entity';
 
@@ -12,22 +13,30 @@ export class PaymentService {
         private readonly paymentRepository: Repository<Payment>,
         @InjectRepository(User)
         private readonly userRepository: Repository<User>,
+        @InjectRepository(CarCustom)
+        private readonly carCustomRepository: Repository<CarCustom>,
         private readonly connection: Connection,
     ) {}
 
     //결제정보 생성 및 저장
-    async create({ impUid, amount, currentUser, merchantUid }) {
+    async create({ impUid, amount, currentUser, merchantUid, carCustomId }) {
         const queryRunner = await this.connection.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction('SERIALIZABLE');
         //transaction 시작!
         try {
+            //0. 커스텀정보 가져오기
+            const carCustom = await this.carCustomRepository.findOne({
+                id: carCustomId,
+            });
+
             //1. Payment 테이블에 거래기록 1줄 생성
             const payment = this.paymentRepository.create({
                 impUid: impUid,
                 amount: amount,
                 user: currentUser,
                 merchantUid: merchantUid,
+                carCustom,
                 status: PAYMENT_STATUS_ENUM.PAYMENT,
             });
 

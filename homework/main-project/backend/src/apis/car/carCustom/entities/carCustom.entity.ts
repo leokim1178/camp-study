@@ -6,6 +6,7 @@ import {
     ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 
 import { CarModel } from '../../carModel/entities/carModel.entity';
@@ -13,7 +14,7 @@ import { CarWheel } from '../../carWheel/entities/carWheel.entity';
 
 @Entity()
 @ObjectType()
-export class CarMyCar {
+export class CarCustom {
     @PrimaryGeneratedColumn('uuid')
     @Field(() => String)
     id: string;
@@ -40,4 +41,8 @@ export class CarMyCar {
     @ManyToOne(() => CarModel)
     @Field(() => CarModel)
     carModel: CarModel;
+
+    @UpdateDateColumn()
+    @Field(() => Date)
+    updatedAt: Date;
 }

@@ -1,6 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { CarMyCar } from '../../carMyCar/entities/carMyCar.entity';
+import {
+    Column,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm';
+import { CarCustom } from '../../carCustom/entities/carCustom.entity';
 
 @Entity()
 @ObjectType()
@@ -13,7 +19,11 @@ export class CarImg {
     @Field(() => String)
     imgURL: string;
 
-    @ManyToOne(() => CarMyCar)
-    @Field(() => CarMyCar)
-    myCar: CarMyCar;
+    @ManyToOne(() => CarCustom)
+    @Field(() => CarCustom)
+    carCustom: CarCustom;
+
+    @UpdateDateColumn()
+    @Field(() => Date)
+    updatedAt: Date;
 }

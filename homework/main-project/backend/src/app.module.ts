@@ -5,21 +5,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CarModelModule } from './apis/car/carModel/carModel.module';
 import { CarTypeModule } from './apis/car/carType/carType.module';
+import { CarCustomModule } from './apis/car/carCustom/carCustom.module';
+import { CarImgModule } from './apis/car/carImg/carImg.module';
 
 import { UserModule } from './apis/user/user.module';
 import { AuthModule } from './apis/auth/auth.module';
 import { PaymentModule } from './apis/payment/payment.module';
-import { CarMyCarModule } from './apis/car/carMyCar/carMyCar.module';
-import { CarImgModule } from './apis/car/carImg/carImg.module';
-import { ConfigModule } from '@nestjs/config';
 
+import { ConfigModule } from '@nestjs/config';
 import * as redisStore from 'cache-manager-redis-store';
 import type { RedisClientOptions } from 'redis';
 
 @Module({
     imports: [
         CarModelModule,
-        CarMyCarModule,
+        CarCustomModule,
         CarTypeModule,
         CarImgModule,
         //==========CarModules=======//

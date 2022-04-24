@@ -1,10 +1,10 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @Entity()
 @ObjectType()
 export class CarWheel {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn()
     @Field(() => String)
     wheelId: string;
     @Column()
@@ -16,4 +16,8 @@ export class CarWheel {
     @Column()
     @Field(() => Int)
     wheelPrice: number;
+
+    @UpdateDateColumn()
+    @Field(() => Date)
+    updatedAt: Date;
 }

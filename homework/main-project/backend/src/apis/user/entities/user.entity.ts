@@ -4,6 +4,7 @@ import {
     DeleteDateColumn,
     Entity,
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -30,6 +31,10 @@ export class User {
     @DeleteDateColumn({ nullable: true })
     @Field(() => Date, { nullable: true })
     deletedAt: Date;
+
+    @UpdateDateColumn()
+    @Field(() => Date)
+    updatedAt: Date;
 
     @Column({ default: 0 })
     @Field(() => Int)

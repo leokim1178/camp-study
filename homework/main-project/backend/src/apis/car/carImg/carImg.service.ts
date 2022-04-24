@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { getToday } from 'src/commons/libraries/utils';
 import { Repository } from 'typeorm';
-import { CarMyCar } from '../carMyCar/entities/carMyCar.entity';
+import { CarCustom } from '../carCustom/entities/carCustom.entity';
 import { CarImg } from './entities/carImg.entity';
 
 interface ICarImg {
@@ -19,8 +19,8 @@ export class CarImgService {
     constructor(
         @InjectRepository(CarImg)
         private readonly carImgRepository: Repository<CarImg>,
-        @InjectRepository(CarMyCar)
-        private readonly carMyCarRepository: Repository<CarMyCar>,
+        @InjectRepository(CarCustom)
+        private readonly carCustomRepository: Repository<CarCustom>,
     ) {}
 
     async upload({ imgs }: ICarImg) {
@@ -50,38 +50,38 @@ export class CarImgService {
         return results;
     }
 
-    async create({ myCarId, imgURLs }) {
-        const myCar = await this.carMyCarRepository.findOne({
-            where: { id: myCarId },
+    async create({ carCustomId, imgURLs }) {
+        const carCustom = await this.carCustomRepository.findOne({
+            where: { id: carCustomId },
         });
 
         const result = await imgURLs.map(async (el) => {
-            return await this.carImgRepository.save({ imgURL: el, myCar });
+            return await this.carImgRepository.save({ imgURL: el, carCustom });
         });
 
         return result;
     }
-    async updateImg({ myCarId, imgURLs }) {
-        //1. myCarId가 유효한지 확인
-        const myCar = await this.carMyCarRepository.findOne({
-            where: { id: myCarId },
+    async updateImg({ carCustomId, imgURLs }) {
+        //1. carCustomId가 유효한지 확인
+        const carCustom = await this.carCustomRepository.findOne({
+            where: { id: carCustomId },
         });
-        if (!myCar)
+        if (!carCustom)
             throw new UnprocessableEntityException(
-                '등록되지 않은 myCarId 입니다',
+                '등록되지 않은 carCustomId 입니다',
             );
-        //2. myCarId에 해당되는 이미지들 불러오기
-        const myCarURLs = await this.carImgRepository.find({
-            where: { myCar: myCarId },
+        //2. carCustomId에 해당되는 이미지들 불러오기
+        const carCustomURLs = await this.carImgRepository.find({
+            where: { carCustom: carCustomId },
         });
 
-        //3. myCarId와 연결된 이미지 중 저장할 항목과 삭제할 항목 분리
+        //3. carCustomId와 연결된 이미지 중 저장할 항목과 삭제할 항목 분리
         const newURLsArray = []; // 새롭게 저장해야하는 url들
         const pastURLs = []; //  이미 존재했던 url들
 
         for (let i = 0; i < imgURLs.length; i++) {
             await Promise.all(
-                myCarURLs.map(async (el) => {
+                carCustomURLs.map(async (el) => {
                     if (el.imgURL === imgURLs[i]) {
                         newURLsArray.push(el.imgURL);
                     } else {
@@ -109,7 +109,7 @@ export class CarImgService {
         await Promise.all(
             newURLs.map(async (el) => {
                 return await this.carImgRepository.save({
-                    myCar,
+                    carCustom,
                     imgURL: el,
                 });
             }),
@@ -119,17 +119,17 @@ export class CarImgService {
         await Promise.all(
             forDelete.map(async (el) => {
                 return await this.carImgRepository.delete({
-                    myCar,
+                    carCustom,
                     imgURL: el,
                 });
             }),
         );
 
-        // 6. myCar에 해당되는 이미지 다시 추출 후 전송
+        // 6. carCustom에 해당되는 이미지 다시 추출 후 전송
 
         const saveResult = await this.carImgRepository.find({
-            where: { myCar },
-            relations: ['myCar'],
+            where: { carCustom },
+            relations: ['carCustom'],
         });
 
         return saveResult;

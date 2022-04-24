@@ -21,19 +21,20 @@ services:
         image: redis:latest
         ports:
             - 6379:6379
+
     elasticsearch:
         image: elasticsearch:7.17.0
         environment:
-            discovery.type: single-node
+            discovery.type: single-node #하나의 컴퓨터라는 뜻 분산해서 여러개로 저장하는 것도 가능하다
         ports:
             - 9200:9200
 
 # mysql에 접속해서 polling 해서 elasticsearch에 넣어주는
     logstash:
         image: logstash:7.17.0  
-        # volumes:
-        #     - ./elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-        #     - ./elk/logstash/mysql-connector-java-8.0.28.jar:/usr/share/logstash/mysql-connector-java-8.0.28.jar
+        volumes:
+            - ./elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+            - ./elk/logstash/mysql-connector-java-8.0.28.jar:/usr/share/logstash/mysql-connector-java-8.0.28.jar
 
     kibana:  
         image: kibana:7.17.0

@@ -3,6 +3,9 @@ import { Field, Float, InputType, Int } from '@nestjs/graphql';
 @InputType()
 export class CreateCarModelInput {
     @Field(() => String)
+    id: string;
+
+    @Field(() => String)
     model: string;
 
     @Field(() => Int)
