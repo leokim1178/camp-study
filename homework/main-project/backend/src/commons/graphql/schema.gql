@@ -22,7 +22,8 @@ type CarModel {
   zero100: Float!
   price: Int!
   wd: String!
-  deletedAt: DateTime!
+  description: String!
+  deletedAt: DateTime
   carType: CarType!
   carTags: [CarTag!]!
 }
@@ -129,6 +130,7 @@ input CreateCarModelInput {
   zero100: Float!
   price: Int!
   wd: String!
+  description: String!
   carTypeId: String!
   carTags: [String!]!
 }
@@ -141,6 +143,7 @@ input UpdateCarModelInput {
   zero100: Float
   price: Int
   wd: String
+  description: String
   carTypeId: String
   carTags: [String!]
 }

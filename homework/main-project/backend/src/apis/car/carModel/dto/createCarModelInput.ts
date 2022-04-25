@@ -24,6 +24,9 @@ export class CreateCarModelInput {
     wd: string;
 
     @Field(() => String)
+    description: string;
+
+    @Field(() => String)
     carTypeId: string;
 
     @Field(() => [String])

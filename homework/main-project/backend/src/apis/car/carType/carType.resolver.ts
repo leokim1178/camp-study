@@ -41,8 +41,9 @@ export class CarTypeResolver {
                     },
                 },
             });
+
             if (searchResult) {
-                // 4. 검색값이 있으면 해당정보를 db에서 가져온다
+                // 4. 해당정보의 검색값을 CarType으로 정리한다
                 const resultArray = searchResult.hits.hits;
 
                 const finalResult = resultArray.map((el) => {
@@ -56,7 +57,7 @@ export class CarTypeResolver {
                 });
 
                 // 5. 마지막으로 가져온 정보값을 redis에 캐싱해준다
-                await this.cachManager.set(search, finalResult, { ttl: 60 });
+                await this.cachManager.set(search, finalResult, { ttl: 0 });
 
                 console.log('elasticsearch에서 검색한 데이터');
 

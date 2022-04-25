@@ -10,7 +10,7 @@ export class CarType {
     @Column()
     @Field(() => String)
     type: string;
-    @Column({ type: 'varchar' })
+    @Column({ type: 'longtext' })
     @Field(() => String)
     description: string;
     @UpdateDateColumn()

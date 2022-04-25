@@ -16,7 +16,7 @@ export class CarTypeService {
             type,
             description,
         }); //카테고리를 데이터베이스에 저장
-        console.log(result);
+
         return result;
     }
 }
