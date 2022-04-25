@@ -91,6 +91,7 @@ type Query {
   fetchCarModel(carModelId: String!): CarModel!
   fetchCarCustoms: [CarCustom!]!
   fetchCarCustom(carCustomId: String!): CarCustom!
+  fetchCarType(search: String!): [CarType!]!
   fetch: String!
   fetchUsers: [User!]!
   fetchUser(email: String!): User!

@@ -64,7 +64,6 @@ export class UserResolver {
             email,
             hashedPW,
             name,
-
             age,
         });
     }

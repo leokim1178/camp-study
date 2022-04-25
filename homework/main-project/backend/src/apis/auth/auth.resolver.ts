@@ -10,10 +10,7 @@ import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
-import {
-    GqlAuthAccessGuard,
-    GqlAuthRefreshGuard,
-} from 'src/commons/auth/gql-auth-guard';
+import { GqlAuthRefreshGuard } from 'src/commons/auth/gql-auth-guard';
 import { CurrentUser, ICurrentUser } from 'src/commons/auth/gql-currentUser';
 import * as jwt from 'jsonwebtoken';
 import { Cache } from 'cache-manager';
