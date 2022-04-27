@@ -13,7 +13,7 @@ services:
         platform: linux/x86_64
         image: mysql:latest
         environment:
-            MYSQL_DATABASE: 'mydocker02'
+            MYSQL_DATABASE: 'main-project-docker'
             MYSQL_ROOT_PASSWORD: '1178'
         ports:
             - 3306:3306
@@ -26,6 +26,7 @@ services:
         image: elasticsearch:7.17.0
         environment:
             discovery.type: single-node #하나의 컴퓨터라는 뜻 분산해서 여러개로 저장하는 것도 가능하다
+            xpack.security.enabled: "false"
         ports:
             - 9200:9200
 
@@ -35,6 +36,9 @@ services:
         volumes:
             - ./elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
             - ./elk/logstash/mysql-connector-java-8.0.28.jar:/usr/share/logstash/mysql-connector-java-8.0.28.jar
+            - ./elk/elasticsearch/car_type_template.json:/usr/share/logstash/car_type_template.json
+
+        
 
     kibana:
         image: kibana:7.17.0

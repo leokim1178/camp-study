@@ -38,12 +38,12 @@ import type { RedisClientOptions } from 'redis';
             port: 3306,
             username: 'root',
             password: '1178',
-            database: 'mydocker02',
+            database: 'main-project-docker',
             entities: [__dirname + '/apis/**/**/*.entity.*'],
             synchronize: true,
             logging: true,
             retryAttempts: 30,
-            retryDelay: 5000,
+            retryDelay: 5000
         }),
         CacheModule.register<RedisClientOptions>({
             store: redisStore,

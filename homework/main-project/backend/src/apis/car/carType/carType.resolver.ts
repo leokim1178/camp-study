@@ -36,8 +36,8 @@ export class CarTypeResolver {
             const searchResult = await this.elasticsearchService.search({
                 index: 'car_type',
                 query: {
-                    match: {
-                        description: search,
+                    bool: {
+                        should: [{ "prefix": { "description": search } }]
                     },
                 },
             });
@@ -57,7 +57,7 @@ export class CarTypeResolver {
                 });
 
                 // 5. 마지막으로 가져온 정보값을 redis에 캐싱해준다
-                await this.cachManager.set(search, finalResult, { ttl: 0 });
+                await this.cachManager.set(search, finalResult, { ttl: 1800 });
 
                 console.log('elasticsearch에서 검색한 데이터');
 
