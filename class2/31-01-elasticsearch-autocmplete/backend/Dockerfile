@@ -1,9 +1,9 @@
 FROM node:14
 
-WORKDIR /myfolder/
-COPY ./package.json /myfolder/
-COPY ./yarn.lock /myfolder/
+WORKDIR /classfolder/
+COPY ./package.json /classfolder/
+COPY ./yarn.lock /classfolder/
 RUN yarn install
 
-COPY . /myfolder/
+COPY . /classfolder/
 CMD yarn start:dev
