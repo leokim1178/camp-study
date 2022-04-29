@@ -29,11 +29,11 @@ import { UserModule } from './apis/user/user.module';
         }),
         TypeOrmModule.forRoot({
             type: 'mysql',
-            host: 'localhost',
+            host: 'my-database',
             port: 3306,
             username: 'root',
             password: '1178',
-            database: 'myproject02',
+            database: 'mydocker02',
             entities: [__dirname + '/apis/**/*.entity.*'],
             synchronize: true,
             logging: true,
