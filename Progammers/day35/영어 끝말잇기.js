@@ -22,3 +22,26 @@ function solution(n, words) {
 }
 
 solution(2, ["hello", "one", "even", "never", "now", "world", "draw"]);
+
+// reduce
+function solution2(n, words) {
+  let stop = false;
+  return words.slice(1).reduce(
+    (acc, cur, i) => {
+      const prev = words[i];
+
+      i++;
+      const player = (i % n) + 1;
+      const turn = Math.floor(i / n) + 1;
+
+      if (stop === false) {
+        if (cur[0] !== prev[prev.length - 1] || words.indexOf(cur) !== i) {
+          stop = true;
+          return [player, turn];
+        }
+      }
+      return acc;
+    },
+    [0, 0]
+  );
+}

@@ -1,16 +1,10 @@
 
+.env
+.env.prod
 
 # compiled output
 /dist
 /node_modules
-.env
-.env.prod
-.env.stage
-.env.dev
-.DS_Store
-yarn.lock
-gcp-bigquery.json
-gcp-storage.json
 
 # Logs
 logs
