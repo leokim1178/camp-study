@@ -8,7 +8,7 @@
 .env.stage
 .env.dev
 .DS_Store
-yarn.lock
+
 gcp-bigquery.json
 gcp-storage.json
 
