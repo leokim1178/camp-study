@@ -34,26 +34,26 @@ function solution(record) {
 }
 
 // 2차 시도 : 성공!!
-// function solution(record) {
-//   record = record.map((el) => el.split(" "));
+function solution(record) {
+  record = record.map((el) => el.split(" "));
 
-//   const logs = [];
-//   const uidName = {};
-//   for (el of record) {
-//     const action = el[0];
-//     const uid = el[1];
-//     const name = el[2];
-//     if (action !== "Leave") uidName[uid] = name;
-//   }
+  const logs = [];
+  const uidName = {};
+  for (el of record) {
+    const action = el[0];
+    const uid = el[1];
+    const name = el[2];
+    if (action !== "Leave") uidName[uid] = name;
+  }
 
-//   for (el of record) {
-//     const [action, uid, name] = el;
-//     if (action === "Enter") logs.push(`${uidName[uid]}님이 들어왔습니다.`);
-//     if (action === "Leave") logs.push(`${uidName[uid]}님이 나갔습니다.`);
-//   }
+  for (el of record) {
+    const [action, uid, name] = el;
+    if (action === "Enter") logs.push(`${uidName[uid]}님이 들어왔습니다.`);
+    if (action === "Leave") logs.push(`${uidName[uid]}님이 나갔습니다.`);
+  }
 
-//   return logs;
-// }
+  return logs;
+}
 
 solution([
   "Enter uid1234 Muzi",
