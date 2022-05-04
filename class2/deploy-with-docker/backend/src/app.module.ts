@@ -13,6 +13,8 @@ import { PointTransactionModule } from './apis/pointTransaction/pointTransaction
 import { ProductModule } from './apis/product/product.module';
 import { ProductCategoryModule } from './apis/productCategory/productCategory.module';
 import { UserModule } from './apis/user/user.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 @Module({
     imports: [
         BoardModule,
@@ -22,6 +24,7 @@ import { UserModule } from './apis/user/user.module';
         UserModule,
         AuthModule,
         FileModule,
+        
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
             autoSchemaFile: 'src/commons/graphql/schema.gql',
@@ -29,17 +32,17 @@ import { UserModule } from './apis/user/user.module';
         }),
         TypeOrmModule.forRoot({
             type: 'mysql',
-            host: 'my-database-02',
+            host: '10.59.16.4',
             port: 3306,
             username: 'root',
             password: '1178',
-            database: 'mypod02',
+            database: 'myserver02',
             entities: [__dirname + '/apis/**/*.entity.*'],
             synchronize: true,
             logging: true,
         }),
     ],
-    // controllers: [AppController],
-    // providers: [AppService],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
