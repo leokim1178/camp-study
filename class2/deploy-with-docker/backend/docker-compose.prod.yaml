@@ -1,15 +1,14 @@
 version: '3.7'
 services:
     my-backend:
-        image: asia.gcr.io/main-project-leo1178/my-backend-02:11
+        image: asia.gcr.io/main-project-leo1178/my-backend-02:12
         platform: linux/x86_64
         build:
             context: .
             dockerfile: Dockerfile
         # volumes:
         #     - ./src:/myfolder/src # 서비스가 시작한 후에 업데이트가 되는건 말이 안된다 배포환경에서는 주석처리한다
-        env_file:
-            - ./.env.prod
+
         ports:
             - 3000:3000
 
