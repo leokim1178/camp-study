@@ -11,7 +11,7 @@ export class FileService {
     async upload({ files }: IFile) {
         const storage = new Storage({
             keyFilename: '/my-secret/gcp-file-storage.json',
-            projectId: 'abcd',
+            projectId: 'abc',
         }).bucket('efg');
         // 일단 먼저 다 받기
         //file 객체 생성
