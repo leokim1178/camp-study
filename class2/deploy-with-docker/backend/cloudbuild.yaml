@@ -14,12 +14,12 @@ steps:
       - push
 
   #3단계 => kubectl set image deployment/my-backend-02 my-backend-02-sha256-1=asia.gcr.io/main-project-leo1178/my-backend-02:11
-  - name: gcr.io/cloud-builders/kubectl
+  - name: 'gcr.io/cloud-builders/kubectl'
     args:
       - set
       - image
       - deployment/my-backend-02
-      - my-backend-02-sha256-1=asia.gcr.io/main-project-leo1178/my-backend-02:12
+      - my-backend-02-sha256-1=asia.gcr.io/main-project-leo1178/my-backend-02:13
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
       - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-02-1
