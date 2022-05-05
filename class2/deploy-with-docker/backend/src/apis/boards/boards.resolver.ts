@@ -10,6 +10,7 @@ export class BoardResolver {
 
     @Query(() => [Board])
     fetchBoards() {
+        console.log("🚀 Jmeter!! 🚀")
         return this.boardService.findAll();
     }
 

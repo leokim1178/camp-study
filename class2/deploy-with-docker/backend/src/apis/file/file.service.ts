@@ -10,10 +10,9 @@ interface IFile {
 export class FileService {
     async upload({ files }: IFile) {
         const storage = new Storage({
-            keyFilename: 'test-347705-05531ea0d82d.json',
-            projectId: 'test-347705',
-        }).bucket('example____1');
-
+            keyFilename: '/my-secret/gcp-file-storage.json',
+            projectId: 'abcd',
+        }).bucket('efg');
         // 일단 먼저 다 받기
         //file 객체 생성
         //await를 붙일 수 있는 부분은 Promise에 한해서 가능하다
@@ -27,9 +26,7 @@ export class FileService {
                 return new Promise((resolve, reject) => {
                     el.createReadStream()
                         .pipe(storage.file(el.filename).createWriteStream())
-                        .on('finish', () =>
-                            resolve(`example____1/${el.filename}`),
-                        )
+                        .on('finish', () => resolve(`/${el.filename}`))
                         .on('error', () => reject());
                 });
             }),
