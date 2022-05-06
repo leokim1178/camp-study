@@ -16,6 +16,9 @@ import { ConfigModule } from '@nestjs/config';
 import * as redisStore from 'cache-manager-redis-store';
 import type { RedisClientOptions } from 'redis';
 
+import { AppController } from './apis/app.controller';
+import { AppService } from './apis/app.service';
+
 @Module({
     imports: [
         CarModelModule,
@@ -34,11 +37,11 @@ import type { RedisClientOptions } from 'redis';
         ConfigModule.forRoot({ isGlobal: true }),
         TypeOrmModule.forRoot({
             type: 'mysql',
-            host: 'main-project-database',
+            host: '10.59.16.7',
             port: 3306,
             username: 'root',
             password: '1178',
-            database: 'main-project-docker',
+            database: 'main-project-database',
             entities: [__dirname + '/apis/**/**/*.entity.*'],
             synchronize: true,
             logging: true,
@@ -47,9 +50,11 @@ import type { RedisClientOptions } from 'redis';
         }),
         CacheModule.register<RedisClientOptions>({
             store: redisStore,
-            url: 'redis://my-redis:6379',
+            url: 'redis://:eHq47k7b@10.140.0.2:6379',
             isGlobal: true,
         }),
     ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
