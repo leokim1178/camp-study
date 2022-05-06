@@ -22,6 +22,8 @@ export class CarImgResolver {
         @Args({ name: 'imgURLs', type: () => [String] })
         imgURLs: string[],
     ) {
+        console.log( "hi0")
+
         return this.carImgService.create({ carCustomId, imgURLs });
     }
 
