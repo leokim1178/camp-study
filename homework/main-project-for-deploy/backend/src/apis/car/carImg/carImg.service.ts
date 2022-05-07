@@ -24,15 +24,11 @@ export class CarImgService {
     ) {}
 
     async upload({ imgs }: ICarImg) {
-        console.log( "hi1")
-
         const storage = new Storage({
-            keyFilename: "/my-secret/gcp-file-storage.json",
+            keyFilename: process.env.STORAGE_KEY_FILENAME,
             projectId: process.env.STORAGE_PROJECT_ID,
         }).bucket(process.env.STORAGE_BUCKET);
-        console.log( "hi1")
         const waitedImgs = await Promise.all(imgs);
-        console.log( "hi2")
 
         const results = await Promise.all(
             waitedImgs.map((el) => {
