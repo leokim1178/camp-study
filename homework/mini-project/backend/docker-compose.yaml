@@ -1,21 +1,21 @@
 version: '3.7'
-services: 
-  my-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./index.js:/myfolder/index.js
-      - ./phone.js:/myfolder/phone.js
-      - ./models:/myfolder/models
-      - ./email.js:/myfolder/email.js
-      - ./scrapper.js:/myfolder/scrapper.js
-      - ./package.json:/myfolder/package.json
-      - ./swagger:/myfolder/swagger
-    ports:
-      - 3001:3001
+services:
+    my-backend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./index.js:/myfolder/index.js
+            - ./phone.js:/myfolder/phone.js
+            - ./models:/myfolder/models
+            - ./email.js:/myfolder/email.js
+            - ./scrapper.js:/myfolder/scrapper.js
+            - ./package.json:/myfolder/package.json
+            - ./swagger:/myfolder/swagger
+        ports:
+            - 3001:3001
 
-  my-database:
-    image: mongo:latest
-    ports:
-      - 27017:27017
+    my-database:
+        image: mongo:latest
+        ports:
+            - 27017:27017
